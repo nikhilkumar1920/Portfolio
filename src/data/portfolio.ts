@@ -22,6 +22,7 @@ export interface PersonalInfo {
   profileImage: string;
   resumePath: string;
   calendlyUrl: string;
+  googleMeetUrl?: string;
 }
 
 export interface SkillCategory {
@@ -162,7 +163,8 @@ export const PORTFOLIO_DATA: {
     },
     profileImage: "/images/profile.png",
     resumePath: "/resume.pdf",
-    calendlyUrl: import.meta.env.VITE_CALENDLY_URL || "https://calendly.com/nikhilkumar20aug/introductory-meeting"
+    calendlyUrl: import.meta.env.VITE_CALENDLY_URL || "https://calendly.com/nikhilkumar20aug/introductory-meeting",
+    googleMeetUrl: import.meta.env.VITE_GOOGLE_MEET_URL || "https://meet.google.com/new"
   },
 
   hero: {

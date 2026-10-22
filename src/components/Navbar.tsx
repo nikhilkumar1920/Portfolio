@@ -3,13 +3,13 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Menu, 
   X, 
-  Calendar, 
   Download, 
   Sun, 
   Moon, 
   ExternalLink 
 } from 'lucide-react';
 import { PORTFOLIO_DATA } from '../data/portfolio';
+import { GoogleMeetIcon } from './GoogleMeetIcon';
 
 interface NavbarProps {
   onOpenScheduler: () => void;
@@ -136,16 +136,16 @@ export const Navbar = ({ onOpenScheduler, theme, onToggleTheme }: NavbarProps) =
               <span>Resume</span>
             </a>
 
-            {/* Schedule Meeting Button */}
+            {/* Schedule Google Meet Button */}
             <button
               onClick={onOpenScheduler}
-              className="relative group overflow-hidden rounded-lg bg-gradient-to-r from-violet-600 via-indigo-600 to-cyan-500 px-3.5 py-1.5 font-mono text-xs font-semibold text-white shadow-[0_0_20px_rgba(139,92,246,0.35)] transition-all hover:shadow-[0_0_25px_rgba(6,182,212,0.5)] hover:scale-[1.02] active:scale-[0.98]"
+              className="relative group overflow-hidden rounded-lg bg-gradient-to-r from-emerald-600 via-teal-600 to-cyan-600 px-3.5 py-1.5 font-mono text-xs font-semibold text-white shadow-[0_0_20px_rgba(0,172,71,0.35)] transition-all hover:shadow-[0_0_25px_rgba(0,172,71,0.55)] hover:scale-[1.02] active:scale-[0.98]"
             >
               <span className="relative z-10 flex items-center gap-1.5">
-                <Calendar className="h-3.5 w-3.5" />
-                <span>Schedule Meeting</span>
+                <GoogleMeetIcon className="h-3.5 w-3.5" />
+                <span>Google Meet</span>
               </span>
-              <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 via-indigo-600 to-violet-600 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+              <div className="absolute inset-0 bg-gradient-to-r from-cyan-600 via-teal-600 to-emerald-600 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
             </button>
           </div>
 
@@ -201,10 +201,10 @@ export const Navbar = ({ onOpenScheduler, theme, onToggleTheme }: NavbarProps) =
                     setMobileMenuOpen(false);
                     onOpenScheduler();
                   }}
-                  className="flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-violet-600 to-cyan-600 py-2.5 text-xs font-semibold text-white shadow-lg"
+                  className="flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 py-2.5 text-xs font-semibold text-white shadow-lg"
                 >
-                  <Calendar className="h-4 w-4" />
-                  <span>Schedule a Meeting</span>
+                  <GoogleMeetIcon className="h-4 w-4" />
+                  <span>Schedule Google Meet</span>
                 </button>
 
                 <div className="grid grid-cols-2 gap-2">

@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { motion, useMotionValue, useSpring, useTransform, AnimatePresence } from 'framer-motion';
 import { 
   ArrowRight, 
-  Calendar, 
   Download, 
   Mail, 
   Code2, 
@@ -16,6 +15,7 @@ import { PORTFOLIO_DATA } from '../data/portfolio';
 import { GithubIcon, LinkedinIcon } from './SocialIcons';
 import { BorderBeam } from './BorderBeam';
 import { MagneticButton } from './MagneticButton';
+import { GoogleMeetIcon } from './GoogleMeetIcon';
 
 interface HeroProps {
   onOpenScheduler: () => void;
@@ -148,14 +148,14 @@ export const Hero = ({ onOpenScheduler }: HeroProps) => {
                 </a>
               </MagneticButton>
 
-              {/* Schedule a Meeting */}
+              {/* Schedule Google Meet */}
               <MagneticButton strength={0.25}>
                 <button
                   onClick={onOpenScheduler}
-                  className="flex items-center justify-center gap-2 rounded-xl border border-cyan-500/40 bg-cyan-950/30 px-5 py-3 text-sm font-semibold text-cyan-200 backdrop-blur-sm transition-all hover:bg-cyan-900/40 hover:border-cyan-400 hover:text-white hover:scale-[1.03] active:scale-[0.98] shadow-[0_0_20px_rgba(6,182,212,0.2)]"
+                  className="flex items-center justify-center gap-2 rounded-xl border border-emerald-500/40 bg-emerald-950/30 px-5 py-3 text-sm font-semibold text-emerald-200 backdrop-blur-sm transition-all hover:bg-emerald-900/40 hover:border-emerald-400 hover:text-white hover:scale-[1.03] active:scale-[0.98] shadow-[0_0_20px_rgba(0,172,71,0.25)]"
                 >
-                  <Calendar className="h-4 w-4 text-cyan-400" />
-                  <span>Schedule a Meeting</span>
+                  <GoogleMeetIcon className="h-4 w-4" />
+                  <span>Schedule Google Meet</span>
                 </button>
               </MagneticButton>
 

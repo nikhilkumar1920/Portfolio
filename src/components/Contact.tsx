@@ -10,6 +10,7 @@ import {
 import confetti from 'canvas-confetti';
 import { PORTFOLIO_DATA } from '../data/portfolio';
 import { LinkedinIcon } from './SocialIcons';
+import { GoogleMeetIcon } from './GoogleMeetIcon';
 
 interface ContactProps {
   onOpenScheduler: () => void;
@@ -209,12 +210,38 @@ export const Contact = ({ onOpenScheduler }: ContactProps) => {
               </div>
 
               {/* Location Box */}
-              <div className="rounded-xl border border-slate-800 bg-slate-950/60 p-4">
+              <div className="rounded-xl border border-slate-800 bg-slate-950/60 p-4 mb-4">
                 <span className="font-mono text-[10px] uppercase text-slate-500">Location</span>
                 <div className="flex items-center gap-2 font-sans text-sm text-slate-300 mt-1">
                   <MapPin className="h-4 w-4 text-violet-400 shrink-0" />
                   <span>{personal.location}</span>
                 </div>
+              </div>
+
+              {/* Google Meet Video Scheduling Card */}
+              <div className="rounded-2xl border border-emerald-500/30 bg-emerald-950/20 p-4 flex flex-col justify-between gap-3 shadow-[0_0_20px_rgba(0,172,71,0.15)]">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <GoogleMeetIcon className="h-4 w-4" />
+                    <span className="font-heading text-xs font-bold text-white">
+                      Google Meet Video Call
+                    </span>
+                  </div>
+                  <span className="font-mono text-[10px] text-emerald-400 bg-emerald-950/60 border border-emerald-500/30 px-2 py-0.5 rounded-full">
+                    1-on-1 HD
+                  </span>
+                </div>
+                <p className="font-sans text-[11px] text-slate-400 leading-snug">
+                  Schedule an instant or planned 15, 30, or 45-minute video discussion via Google Meet.
+                </p>
+                <button
+                  type="button"
+                  onClick={onOpenScheduler}
+                  className="w-full flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 py-2.5 font-mono text-xs font-semibold text-white shadow-md transition-all hover:scale-[1.01]"
+                >
+                  <Calendar className="h-3.5 w-3.5" />
+                  <span>Schedule on Google Meet</span>
+                </button>
               </div>
             </div>
           </div>
