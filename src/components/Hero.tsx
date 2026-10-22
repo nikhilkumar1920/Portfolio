@@ -247,34 +247,6 @@ export const Hero = ({ onOpenScheduler }: HeroProps) => {
               {/* Animated Glow Halo */}
               <div className="absolute -inset-6 rounded-full bg-gradient-to-tr from-violet-600/30 via-indigo-600/20 to-cyan-500/30 blur-3xl animate-pulse-glow pointer-events-none" />
 
-              {/* Orbiting Tech Satellite Pills */}
-              <motion.div
-                animate={{ rotate: 360 }}
-                transition={{ duration: 25, repeat: Infinity, ease: 'linear' }}
-                className="absolute -inset-10 sm:-inset-14 rounded-full border border-violet-500/15 pointer-events-none"
-              >
-                {/* Python Satellite */}
-                <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full border border-violet-400/50 bg-slate-950/90 px-2.5 py-1 text-[11px] font-mono text-violet-300 shadow-[0_0_15px_rgba(139,92,246,0.5)] flex items-center gap-1">
-                  <span>🐍</span>
-                  <span className="font-semibold">Python</span>
-                </div>
-                {/* PyTorch Satellite */}
-                <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 rounded-full border border-rose-400/50 bg-slate-950/90 px-2.5 py-1 text-[11px] font-mono text-rose-300 shadow-[0_0_15px_rgba(244,63,94,0.5)] flex items-center gap-1">
-                  <span>🔥</span>
-                  <span className="font-semibold">PyTorch</span>
-                </div>
-                {/* TypeScript Satellite */}
-                <div className="absolute left-0 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full border border-cyan-400/50 bg-slate-950/90 px-2.5 py-1 text-[11px] font-mono text-cyan-300 shadow-[0_0_15px_rgba(6,182,212,0.5)] flex items-center gap-1">
-                  <span>⚡</span>
-                  <span className="font-semibold">TypeScript</span>
-                </div>
-                {/* Security Satellite */}
-                <div className="absolute right-0 top-1/2 translate-x-1/2 -translate-y-1/2 rounded-full border border-emerald-400/50 bg-slate-950/90 px-2.5 py-1 text-[11px] font-mono text-emerald-300 shadow-[0_0_15px_rgba(16,185,129,0.5)] flex items-center gap-1">
-                  <span>🛡️</span>
-                  <span className="font-semibold">CyberSec</span>
-                </div>
-              </motion.div>
-
               {/* Main Portrait Container with 3D Mouse Tilt */}
               <motion.div 
                 onMouseMove={handleMouseMove}

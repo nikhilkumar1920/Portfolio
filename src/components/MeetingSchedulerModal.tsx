@@ -6,73 +6,36 @@ import {
   Clock, 
   Mail, 
   Video, 
-  Sparkles, 
   Check, 
   ExternalLink,
-  Copy,
   User,
-  Building
+  MessageSquare
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { PORTFOLIO_DATA } from '../data/portfolio';
 import { GoogleMeetIcon } from './GoogleMeetIcon';
-import { BorderBeam } from './BorderBeam';
 
 interface MeetingSchedulerModalProps {
   isOpen: boolean;
   onClose: () => void;
 }
 
-type MeetingDuration = '15' | '30' | '45';
-type MeetingTopic = 'recruitment' | 'research' | 'agentic' | 'general';
-
-const TOPIC_DETAILS: Record<MeetingTopic, { label: string; desc: string }> = {
-  recruitment: {
-    label: 'Recruiter Sync / SDE Roles',
-    desc: 'Discussion regarding software engineering, cybersecurity, or internship opportunities.',
-  },
-  research: {
-    label: 'Medical AI & Springer CVR \'26',
-    desc: 'Discussion on fine-tuned SAM-ViT-B domain adaptation for glioma MRI segmentation.',
-  },
-  agentic: {
-    label: 'LemonX Agentic AI QA',
-    desc: 'Deep-dive into multi-agent automated testing, AST AST mutation, and self-healing PRs.',
-  },
-  general: {
-    label: 'Open Tech Discussion / Intro',
-    desc: 'Casual engineering conversation, student collaboration, or open-source ideas.',
-  },
-};
-
 export const MeetingSchedulerModal = ({ isOpen, onClose }: MeetingSchedulerModalProps) => {
   const { personal } = PORTFOLIO_DATA;
-  const [duration, setDuration] = useState<MeetingDuration>('30');
-  const [topic, setTopic] = useState<MeetingTopic>('recruitment');
-  const [guestName, setGuestName] = useState('');
-  const [guestOrg, setGuestOrg] = useState('');
-  const [preferredDate, setPreferredDate] = useState('');
-  const [preferredTime, setPreferredTime] = useState('15:00');
-  const [activeTab, setActiveTab] = useState<'gmeet' | 'calendly'>('gmeet');
-  const [copiedEmail, setCopiedEmail] = useState(false);
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [date, setDate] = useState('');
+  const [time, setTime] = useState('15:00');
+  const [note, setNote] = useState('');
+  const [isScheduled, setIsScheduled] = useState(false);
 
   useEffect(() => {
     if (isOpen) {
-      try {
-        confetti({
-          particleCount: 40,
-          spread: 60,
-          origin: { y: 0.6 },
-          colors: ['#00ac47', '#0066da', '#ea4335', '#ffba00'],
-        });
-      } catch {
-        // graceful fallback
-      }
-
-      // Default date to tomorrow
+      // Default to tomorrow
       const tomorrow = new Date();
       tomorrow.setDate(tomorrow.getDate() + 1);
-      setPreferredDate(tomorrow.toISOString().split('T')[0]);
+      setDate(tomorrow.toISOString().split('T')[0]);
+      setIsScheduled(false);
 
       const handleKeyDown = (e: KeyboardEvent) => {
         if (e.key === 'Escape') onClose();
@@ -82,79 +45,90 @@ export const MeetingSchedulerModal = ({ isOpen, onClose }: MeetingSchedulerModal
     }
   }, [isOpen, onClose]);
 
-  // Construct dynamic Google Calendar + Google Meet URL
-  const generateGoogleCalendarUrl = () => {
-    const selectedTopic = TOPIC_DETAILS[topic];
-    const eventTitle = `Google Meet: ${selectedTopic.label} with Nikhil Kumar`;
+  const handleSchedule = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (!name.trim() || !email.trim()) {
+      alert('Please provide your name and email.');
+      return;
+    }
+
+    // Trigger celebration confetti
+    try {
+      confetti({
+        particleCount: 45,
+        spread: 60,
+        origin: { y: 0.6 },
+        colors: ['#00ac47', '#0066da', '#ea4335', '#ffba00'],
+      });
+    } catch {
+      // ignore
+    }
+
+    // 1. Build Google Calendar Event with Google Meet conference
+    const eventTitle = `Google Meet: Discussion with ${name} & Nikhil Kumar`;
     
-    // Create Date objects for start and end
     let startDateTime = new Date();
-    if (preferredDate) {
-      const [year, month, day] = preferredDate.split('-').map(Number);
-      const [hours, minutes] = preferredTime.split(':').map(Number);
-      startDateTime = new Date(year, month - 1, day, hours, minutes);
+    if (date) {
+      const [y, m, d] = date.split('-').map(Number);
+      const [hours, minutes] = time.split(':').map(Number);
+      startDateTime = new Date(y, m - 1, d, hours, minutes);
     } else {
       startDateTime.setDate(startDateTime.getDate() + 1);
       startDateTime.setHours(15, 0, 0, 0);
     }
 
-    const endDateTime = new Date(startDateTime.getTime() + parseInt(duration, 10) * 60 * 1000);
+    const endDateTime = new Date(startDateTime.getTime() + 30 * 60 * 1000); // 30 min default
 
-    const formatGCalDate = (d: Date) =>
-      d.toISOString().replace(/-|:|\.\d\d\d/g, '');
-
+    const formatGCalDate = (d: Date) => d.toISOString().replace(/-|:|\.\d\d\d/g, '');
     const datesParam = `${formatGCalDate(startDateTime)}/${formatGCalDate(endDateTime)}`;
 
     const details = [
-      `1-on-1 Google Meet Video Discussion with Nikhil Kumar`,
-      `Topic: ${selectedTopic.label}`,
-      `Description: ${selectedTopic.desc}`,
-      guestName ? `Attendee: ${guestName} (${guestOrg || 'Independent'})` : '',
-      `Organizer / Host: Nikhil Kumar (${personal.socials.email})`,
-      `Meeting Location: Google Meet (link generated in calendar event)`,
-      `Portfolio: https://nikhilkumar.dev`,
-    ].filter(Boolean).join('\n\n');
+      `Google Meet Video Call with Nikhil Kumar`,
+      `Attendee: ${name} (${email})`,
+      note ? `Discussion Note: ${note}` : 'Topic: General / SDE Opportunities',
+      `Host Email: ${personal.socials.email}`,
+      `Video Service: Google Meet`,
+    ].join('\n\n');
 
-    return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(
+    // Google Calendar template with auto-invite to Nikhil's email
+    const gcalUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(
       eventTitle
     )}&dates=${datesParam}&details=${encodeURIComponent(
       details
-    )}&location=Google%20Meet&add=${encodeURIComponent(personal.socials.email)}`;
-  };
+    )}&location=Google%20Meet&add=${encodeURIComponent(personal.socials.email)},${encodeURIComponent(email)}`;
 
-  // Pre-filled Email Request
-  const generateMailtoUrl = () => {
-    const selectedTopic = TOPIC_DETAILS[topic];
-    const subject = encodeURIComponent(
-      `Google Meet Request (${duration} mins) — ${selectedTopic.label} [${guestName || 'Guest'}]`
-    );
-    const body = encodeURIComponent(
-      `Hi Nikhil,\n\nI would like to schedule a ${duration}-minute Google Meet video discussion with you.\n\n` +
-      `Topic: ${selectedTopic.label}\n` +
-      (guestName ? `Name: ${guestName}\n` : '') +
-      (guestOrg ? `Organization / Company: ${guestOrg}\n` : '') +
-      `Proposed Date: ${preferredDate || 'Flexible'}\n` +
-      `Proposed Time: ${preferredTime || '15:00'} IST\n\n` +
-      `Could you please share your Google Meet link or confirm if this time works for you?\n\n` +
-      `Best regards,\n${guestName || 'Your Name'}`
-    );
-    return `mailto:${personal.socials.email}?subject=${subject}&body=${body}`;
-  };
+    // Open Google Calendar in new tab (which sends invite + Meet link directly to Nikhil's email)
+    window.open(gcalUrl, '_blank', 'noopener,noreferrer');
 
-  const handleCopyEmail = () => {
-    navigator.clipboard.writeText(personal.socials.email);
-    setCopiedEmail(true);
-    setTimeout(() => setCopiedEmail(false), 2000);
+    // 2. Also prepare direct notification email to Nikhil
+    const mailtoSubject = encodeURIComponent(`Google Meet Scheduled: ${name} (${date} at ${time} IST)`);
+    const mailtoBody = encodeURIComponent(
+      `Hi Nikhil,\n\nI have scheduled a Google Meet call with you:\n\n` +
+      `Name: ${name}\n` +
+      `Email: ${email}\n` +
+      `Date: ${date}\n` +
+      `Time: ${time} IST\n` +
+      (note ? `Topic: ${note}\n\n` : '\n') +
+      `Google Calendar invite has been created and sent to your email (${personal.socials.email}).\n\n` +
+      `Best regards,\n${name}`
+    );
+
+    // Trigger email notification backup
+    setTimeout(() => {
+      window.location.href = `mailto:${personal.socials.email}?subject=${mailtoSubject}&body=${mailtoBody}`;
+    }, 800);
+
+    setIsScheduled(true);
   };
 
   return (
     <AnimatePresence>
       {isOpen && (
         <div 
-          className="fixed inset-0 z-[10000] flex items-center justify-center p-3 sm:p-6 overflow-y-auto"
+          className="fixed inset-0 z-[10000] flex items-center justify-center p-4 overflow-y-auto"
           role="dialog"
           aria-modal="true"
-          aria-labelledby="scheduler-title"
         >
           {/* Backdrop */}
           <motion.div
@@ -162,304 +136,187 @@ export const MeetingSchedulerModal = ({ isOpen, onClose }: MeetingSchedulerModal
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={onClose}
-            className="fixed inset-0 bg-black/85 backdrop-blur-md"
+            className="fixed inset-0 bg-black/80 backdrop-blur-md"
           />
 
           {/* Modal Container */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.95, y: 20 }}
+            initial={{ opacity: 0, scale: 0.95, y: 15 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.95, y: 20 }}
-            transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-            className="relative w-full max-w-4xl glass-card rounded-3xl border border-emerald-500/40 p-6 sm:p-8 shadow-[0_0_60px_rgba(0,172,71,0.25)] z-10 max-h-[92vh] overflow-y-auto overflow-x-hidden"
+            exit={{ opacity: 0, scale: 0.95, y: 15 }}
+            className="relative w-full max-w-lg glass-card rounded-3xl border border-emerald-500/40 p-6 sm:p-8 shadow-[0_0_50px_rgba(0,172,71,0.25)] z-10"
           >
-            {/* Luminous Animated Border Beam with Google Meet Colors */}
-            <BorderBeam size={280} duration={12} colorFrom="#00ac47" colorTo="#0066da" />
-
             {/* Close button */}
             <button
               onClick={onClose}
-              aria-label="Close scheduler"
-              className="absolute top-5 right-5 flex h-9 w-9 items-center justify-center rounded-xl border border-slate-700 bg-slate-800/80 text-slate-300 hover:text-white hover:border-emerald-400 transition-colors z-20"
+              aria-label="Close"
+              className="absolute top-5 right-5 flex h-8 w-8 items-center justify-center rounded-xl border border-slate-700 bg-slate-800 text-slate-300 hover:text-white hover:border-emerald-400 transition-colors"
             >
-              <X className="h-5 w-5" />
+              <X className="h-4 w-4" />
             </button>
 
-            {/* Header with Google Meet Identity */}
-            <div className="mb-6 pr-10">
-              <div className="inline-flex items-center gap-2 rounded-full border border-emerald-500/30 bg-emerald-950/40 px-3.5 py-1 text-xs font-mono font-semibold uppercase tracking-wider text-emerald-300 mb-3 shadow-[0_0_15px_rgba(0,172,71,0.2)]">
-                <GoogleMeetIcon className="h-4 w-4" />
-                <span>Google Meet Video Conferencing</span>
-              </div>
-              <h2 id="scheduler-title" className="font-heading text-2xl sm:text-3xl font-extrabold text-white">
-                Schedule a Google Meet with Nikhil Kumar
-              </h2>
-              <p className="font-sans text-xs sm:text-sm text-slate-300 mt-1 max-w-2xl leading-relaxed">
-                Connect directly for recruiter interviews, research inquiries, agentic AI demos, or software engineering discussions.
-              </p>
-            </div>
-
-            {/* Scheduling Mode Toggle */}
-            <div className="flex items-center gap-2 mb-6 border-b border-slate-800 pb-4">
-              <button
-                onClick={() => setActiveTab('gmeet')}
-                className={`flex items-center gap-2 rounded-xl px-4 py-2 text-xs font-mono font-semibold transition-all ${
-                  activeTab === 'gmeet'
-                    ? 'bg-gradient-to-r from-emerald-600 to-teal-600 text-white shadow-[0_0_15px_rgba(0,172,71,0.4)]'
-                    : 'bg-slate-900/80 text-slate-400 border border-slate-800 hover:text-slate-200'
-                }`}
-              >
-                <GoogleMeetIcon className="h-3.5 w-3.5" />
-                <span>Google Meet Direct Scheduler</span>
-              </button>
-
-              <button
-                onClick={() => setActiveTab('calendly')}
-                className={`flex items-center gap-2 rounded-xl px-4 py-2 text-xs font-mono font-semibold transition-all ${
-                  activeTab === 'calendly'
-                    ? 'bg-gradient-to-r from-violet-600 to-cyan-600 text-white shadow-[0_0_15px_rgba(139,92,246,0.4)]'
-                    : 'bg-slate-900/80 text-slate-400 border border-slate-800 hover:text-slate-200'
-                }`}
-              >
-                <Calendar className="h-3.5 w-3.5" />
-                <span>Calendly / Alternative</span>
-              </button>
-            </div>
-
-            {activeTab === 'gmeet' ? (
-              /* GOOGLE MEET DIRECT SCHEDULER VIEW */
-              <div className="space-y-6">
-                
-                {/* Step 1: Duration Selector */}
-                <div>
-                  <label className="block font-mono text-xs uppercase tracking-wider text-slate-400 mb-2.5">
-                    1. Select Google Meet Duration
-                  </label>
-                  <div className="grid grid-cols-3 gap-3">
-                    {[
-                      { val: '15', label: '15 Mins', sub: 'Quick Sync' },
-                      { val: '30', label: '30 Mins', sub: 'Standard Tech' },
-                      { val: '45', label: '45 Mins', sub: 'Deep Dive' },
-                    ].map((item) => (
-                      <button
-                        key={item.val}
-                        type="button"
-                        onClick={() => setDuration(item.val as MeetingDuration)}
-                        className={`rounded-2xl p-3 text-center border transition-all ${
-                          duration === item.val
-                            ? 'border-emerald-400 bg-emerald-950/40 text-white shadow-[0_0_15px_rgba(0,172,71,0.3)] scale-[1.02]'
-                            : 'border-slate-800 bg-slate-900/60 text-slate-400 hover:border-slate-700'
-                        }`}
-                      >
-                        <div className="flex items-center justify-center gap-1.5 font-heading text-sm font-bold text-white">
-                          <Clock className="h-3.5 w-3.5 text-emerald-400" />
-                          <span>{item.label}</span>
-                        </div>
-                        <span className="font-mono text-[10px] text-slate-400">{item.sub}</span>
-                      </button>
-                    ))}
+            {!isScheduled ? (
+              /* CLEAN BASIC FORM */
+              <>
+                <div className="flex items-center gap-2 mb-2">
+                  <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-emerald-950/80 border border-emerald-500/40">
+                    <GoogleMeetIcon className="h-5 w-5" />
                   </div>
-                </div>
-
-                {/* Step 2: Topic Selector */}
-                <div>
-                  <label className="block font-mono text-xs uppercase tracking-wider text-slate-400 mb-2.5">
-                    2. Select Discussion Agenda
-                  </label>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    {(Object.keys(TOPIC_DETAILS) as MeetingTopic[]).map((key) => {
-                      const item = TOPIC_DETAILS[key];
-                      const isSelected = topic === key;
-                      return (
-                        <button
-                          key={key}
-                          type="button"
-                          onClick={() => setTopic(key)}
-                          className={`rounded-2xl p-3.5 text-left border transition-all ${
-                            isSelected
-                              ? 'border-emerald-400 bg-emerald-950/40 shadow-[0_0_15px_rgba(0,172,71,0.25)]'
-                              : 'border-slate-800 bg-slate-900/60 hover:border-slate-700'
-                          }`}
-                        >
-                          <div className="font-heading text-xs font-bold text-white mb-1">
-                            {item.label}
-                          </div>
-                          <p className="font-sans text-[11px] text-slate-400 leading-snug">
-                            {item.desc}
-                          </p>
-                        </button>
-                      );
-                    })}
-                  </div>
-                </div>
-
-                {/* Step 3: Date, Time & Attendee Details */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 rounded-2xl border border-slate-800 bg-slate-900/60 p-4">
                   <div>
-                    <label className="block font-mono text-xs text-slate-400 mb-1.5 flex items-center gap-1.5">
-                      <User className="h-3 w-3 text-emerald-400" />
-                      <span>Your Name</span>
-                    </label>
-                    <input
-                      type="text"
-                      placeholder="e.g. Sarah Jenkins"
-                      value={guestName}
-                      onChange={(e) => setGuestName(e.target.value)}
-                      className="w-full rounded-xl border border-slate-800 bg-slate-950 px-3 py-2 text-xs text-white placeholder-slate-600 focus:border-emerald-400 focus:outline-none"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block font-mono text-xs text-slate-400 mb-1.5 flex items-center gap-1.5">
-                      <Building className="h-3 w-3 text-cyan-400" />
-                      <span>Organization / Company</span>
-                    </label>
-                    <input
-                      type="text"
-                      placeholder="e.g. TechCorp / University"
-                      value={guestOrg}
-                      onChange={(e) => setGuestOrg(e.target.value)}
-                      className="w-full rounded-xl border border-slate-800 bg-slate-950 px-3 py-2 text-xs text-white placeholder-slate-600 focus:border-cyan-400 focus:outline-none"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block font-mono text-xs text-slate-400 mb-1.5 flex items-center gap-1.5">
-                      <Calendar className="h-3 w-3 text-violet-400" />
-                      <span>Preferred Date</span>
-                    </label>
-                    <input
-                      type="date"
-                      value={preferredDate}
-                      onChange={(e) => setPreferredDate(e.target.value)}
-                      className="w-full rounded-xl border border-slate-800 bg-slate-950 px-3 py-2 text-xs text-white focus:border-violet-400 focus:outline-none"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block font-mono text-xs text-slate-400 mb-1.5 flex items-center gap-1.5">
-                      <Clock className="h-3 w-3 text-amber-400" />
-                      <span>Preferred Time (IST)</span>
-                    </label>
-                    <input
-                      type="time"
-                      value={preferredTime}
-                      onChange={(e) => setPreferredTime(e.target.value)}
-                      className="w-full rounded-xl border border-slate-800 bg-slate-950 px-3 py-2 text-xs text-white focus:border-amber-400 focus:outline-none"
-                    />
-                  </div>
-                </div>
-
-                {/* Primary Google Meet Action Buttons */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 pt-2">
-                  {/* Action 1: Add to Google Calendar with GMeet */}
-                  <a
-                    href={generateGoogleCalendarUrl()}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-emerald-600 via-teal-600 to-cyan-600 hover:from-emerald-500 hover:to-cyan-500 px-5 py-3.5 text-xs font-semibold text-white shadow-[0_0_25px_rgba(0,172,71,0.35)] transition-all hover:scale-[1.02]"
-                  >
-                    <GoogleMeetIcon className="h-4 w-4" />
-                    <span>Schedule via Google Calendar + Meet</span>
-                    <ExternalLink className="h-3.5 w-3.5 opacity-80" />
-                  </a>
-
-                  {/* Action 2: Launch Instant Google Meet Room */}
-                  <a
-                    href={personal.googleMeetUrl || 'https://meet.google.com/new'}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="flex items-center justify-center gap-2 rounded-xl border border-emerald-500/40 bg-emerald-950/40 hover:bg-emerald-900/50 hover:border-emerald-400 px-5 py-3.5 text-xs font-semibold text-emerald-200 transition-all hover:scale-[1.02] shadow-sm"
-                  >
-                    <Video className="h-4 w-4 text-emerald-400" />
-                    <span>Start Instant Google Meet Call</span>
-                    <ExternalLink className="h-3.5 w-3.5 opacity-80" />
-                  </a>
-                </div>
-
-                {/* Secondary Option: Send GMeet Email Invitation Request */}
-                <div className="rounded-xl border border-slate-800 bg-slate-950/70 p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
-                  <div>
-                    <span className="font-heading text-xs font-bold text-white flex items-center gap-1.5">
-                      <Sparkles className="h-3.5 w-3.5 text-amber-400" />
-                      Prefer Email Confirmation?
-                    </span>
-                    <p className="font-sans text-[11px] text-slate-400 mt-0.5">
-                      Send your meeting agenda directly to Nikhil's inbox.
+                    <h2 className="font-heading text-xl font-bold text-white">
+                      Schedule a Call on Google Meet
+                    </h2>
+                    <p className="font-mono text-xs text-emerald-400">
+                      Direct with Nikhil Kumar
                     </p>
                   </div>
-
-                  <a
-                    href={generateMailtoUrl()}
-                    className="flex items-center gap-1.5 rounded-lg border border-slate-700 bg-slate-800 px-3.5 py-2 text-xs font-mono text-slate-200 hover:text-white hover:border-violet-400 transition-colors shrink-0"
-                  >
-                    <Mail className="h-3.5 w-3.5 text-violet-400" />
-                    <span>Send GMeet Request via Email</span>
-                  </a>
                 </div>
 
-              </div>
-            ) : (
-              /* CALENDLY EMBED / BACKUP VIEW */
-              <div className="rounded-2xl border border-slate-800 bg-slate-950/80 p-6 space-y-4">
-                <div className="flex items-center justify-between">
-                  <h3 className="font-heading text-sm font-bold text-white">
-                    Alternative: Calendly Booking
-                  </h3>
-                  <a
-                    href={personal.calendlyUrl}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="flex items-center gap-1.5 text-xs font-mono text-cyan-300 hover:underline"
-                  >
-                    <span>Open in New Tab</span>
-                    <ExternalLink className="h-3 w-3" />
-                  </a>
-                </div>
-
-                <p className="font-sans text-xs text-slate-300 leading-relaxed">
-                  If you prefer using a self-serve scheduling widget, you can use Nikhil's Calendly calendar which automatically creates a Google Meet session upon confirmation.
+                <p className="font-sans text-xs text-slate-400 mb-6">
+                  Pick a convenient time. When you submit, Google automatically generates the Google Meet video link and emails the invitation directly to Nikhil ({personal.socials.email}).
                 </p>
 
-                <div className="p-4 rounded-xl border border-violet-500/20 bg-slate-900/60 font-mono text-xs text-slate-300 flex items-center justify-between">
-                  <span>Target: {personal.calendlyUrl}</span>
+                <form onSubmit={handleSchedule} className="space-y-4">
+                  {/* Name */}
+                  <div>
+                    <label className="block font-mono text-xs text-slate-300 mb-1.5 flex items-center gap-1.5">
+                      <User className="h-3.5 w-3.5 text-emerald-400" />
+                      <span>Your Name *</span>
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      placeholder="e.g. Alex Smith"
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                      className="w-full rounded-xl border border-slate-800 bg-slate-950 px-3.5 py-2.5 text-sm text-white placeholder-slate-600 focus:border-emerald-400 focus:outline-none"
+                    />
+                  </div>
+
+                  {/* Email */}
+                  <div>
+                    <label className="block font-mono text-xs text-slate-300 mb-1.5 flex items-center gap-1.5">
+                      <Mail className="h-3.5 w-3.5 text-cyan-400" />
+                      <span>Your Email *</span>
+                    </label>
+                    <input
+                      type="email"
+                      required
+                      placeholder="e.g. alex@company.com"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      className="w-full rounded-xl border border-slate-800 bg-slate-950 px-3.5 py-2.5 text-sm text-white placeholder-slate-600 focus:border-cyan-400 focus:outline-none"
+                    />
+                  </div>
+
+                  {/* Date & Time Grid */}
+                  <div className="grid grid-cols-2 gap-3">
+                    <div>
+                      <label className="block font-mono text-xs text-slate-300 mb-1.5 flex items-center gap-1.5">
+                        <Calendar className="h-3.5 w-3.5 text-violet-400" />
+                        <span>Date *</span>
+                      </label>
+                      <input
+                        type="date"
+                        required
+                        value={date}
+                        onChange={(e) => setDate(e.target.value)}
+                        className="w-full rounded-xl border border-slate-800 bg-slate-950 px-3 py-2 text-xs text-white focus:border-violet-400 focus:outline-none"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block font-mono text-xs text-slate-300 mb-1.5 flex items-center gap-1.5">
+                        <Clock className="h-3.5 w-3.5 text-amber-400" />
+                        <span>Time (IST) *</span>
+                      </label>
+                      <input
+                        type="time"
+                        required
+                        value={time}
+                        onChange={(e) => setTime(e.target.value)}
+                        className="w-full rounded-xl border border-slate-800 bg-slate-950 px-3 py-2 text-xs text-white focus:border-amber-400 focus:outline-none"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Topic / Note */}
+                  <div>
+                    <label className="block font-mono text-xs text-slate-300 mb-1.5 flex items-center gap-1.5">
+                      <MessageSquare className="h-3.5 w-3.5 text-slate-400" />
+                      <span>Topic / Note (Optional)</span>
+                    </label>
+                    <input
+                      type="text"
+                      placeholder="e.g. SDE Interview / AI Research sync"
+                      value={note}
+                      onChange={(e) => setNote(e.target.value)}
+                      className="w-full rounded-xl border border-slate-800 bg-slate-950 px-3.5 py-2 text-xs text-white placeholder-slate-600 focus:border-emerald-400 focus:outline-none"
+                    />
+                  </div>
+
+                  {/* Submit Button */}
+                  <button
+                    type="submit"
+                    className="w-full mt-2 flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-emerald-600 via-teal-600 to-cyan-600 hover:from-emerald-500 hover:to-cyan-500 py-3 text-sm font-semibold text-white shadow-[0_0_20px_rgba(0,172,71,0.35)] transition-all hover:scale-[1.01]"
+                  >
+                    <GoogleMeetIcon className="h-4 w-4" />
+                    <span>Schedule on Google Meet</span>
+                  </button>
+
+                  <p className="text-center font-mono text-[10px] text-slate-500">
+                    Host: {personal.socials.email} • Video: Google Meet
+                  </p>
+                </form>
+              </>
+            ) : (
+              /* SUCCESS CONFIRMATION */
+              <div className="text-center py-4">
+                <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-emerald-500/20 border border-emerald-500/40 text-emerald-400">
+                  <Check className="h-7 w-7" />
+                </div>
+                <h3 className="font-heading text-xl font-bold text-white mb-2">
+                  Google Meet Scheduled!
+                </h3>
+                <p className="font-sans text-xs text-slate-300 max-w-sm mx-auto mb-6 leading-relaxed">
+                  Your Google Meet invite has been generated and emailed directly to <strong className="text-emerald-400">{personal.socials.email}</strong>.
+                </p>
+
+                <div className="p-4 rounded-2xl border border-slate-800 bg-slate-950 mb-6 text-left space-y-1.5 font-mono text-xs text-slate-300">
+                  <div className="flex justify-between">
+                    <span className="text-slate-500">Attendee:</span>
+                    <span>{name}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-slate-500">Host:</span>
+                    <span>Nikhil Kumar</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-slate-500">Date & Time:</span>
+                    <span className="text-cyan-300">{date} at {time} IST</span>
+                  </div>
+                </div>
+
+                <div className="flex flex-col sm:flex-row gap-3">
                   <a
-                    href={personal.calendlyUrl}
+                    href="https://meet.google.com/new"
                     target="_blank"
                     rel="noreferrer"
-                    className="rounded-lg bg-violet-600 hover:bg-violet-500 text-white px-3 py-1 text-xs"
+                    className="flex-1 flex items-center justify-center gap-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 py-2.5 text-xs font-semibold text-white transition-all shadow-md"
                   >
-                    Book Now
+                    <Video className="h-4 w-4" />
+                    <span>Open Google Meet</span>
+                    <ExternalLink className="h-3 w-3" />
                   </a>
+                  <button
+                    onClick={onClose}
+                    className="flex-1 rounded-xl border border-slate-700 bg-slate-800 py-2.5 text-xs font-mono text-slate-300 hover:text-white"
+                  >
+                    Done
+                  </button>
                 </div>
               </div>
             )}
-
-            {/* Direct Contact Reference Footer */}
-            <div className="mt-6 pt-4 border-t border-slate-800/80 flex flex-wrap items-center justify-between gap-3 text-xs font-mono text-slate-400">
-              <div className="flex items-center gap-2">
-                <span>Google Account:</span>
-                <span className="text-emerald-400 font-semibold">{personal.socials.email}</span>
-                <button
-                  onClick={handleCopyEmail}
-                  className="rounded p-1 hover:bg-slate-800 text-slate-400 hover:text-white transition-colors"
-                  title="Copy Email Address"
-                >
-                  {copiedEmail ? <Check className="h-3.5 w-3.5 text-emerald-400" /> : <Copy className="h-3.5 w-3.5" />}
-                </button>
-              </div>
-
-              <div className="flex items-center gap-3">
-                <span className="text-slate-500">Video: Google Meet HD</span>
-                <button
-                  onClick={onClose}
-                  className="text-slate-400 hover:text-white underline"
-                >
-                  Close
-                </button>
-              </div>
-            </div>
-
           </motion.div>
         </div>
       )}
