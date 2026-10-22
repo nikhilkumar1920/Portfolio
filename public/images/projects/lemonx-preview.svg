@@ -1,0 +1,117 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" fill="none">
+  <defs>
+    <linearGradient id="lx-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#080b18" />
+      <stop offset="100%" stop-color="#04060c" />
+    </linearGradient>
+    <linearGradient id="lx-card" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#11182c" />
+      <stop offset="100%" stop-color="#0a0e1c" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="450" rx="16" fill="url(#lx-bg)" />
+  <rect x="1" y="1" width="798" height="448" rx="15" stroke="#1f293d" stroke-width="2" />
+
+  <!-- Grid overlay -->
+  <g stroke="#151e34" stroke-width="1" opacity="0.6">
+    <path d="M0 75H800M0 150H800M0 225H800M0 300H800M0 375H800" />
+    <path d="M100 0V450M200 0V450M300 0V450M400 0V450M500 0V450M600 0V450M700 0V450" />
+  </g>
+
+  <!-- Header Bar -->
+  <rect x="20" y="20" width="760" height="44" rx="10" fill="#0c1224" stroke="#25324d" stroke-width="1.5" />
+  <circle cx="45" cy="42" r="5" fill="#f43f5e" />
+  <circle cx="62" cy="42" r="5" fill="#f59e0b" />
+  <circle cx="79" cy="42" r="5" fill="#10b981" />
+  <text x="110" y="47" fill="#94a3b8" font-family="'JetBrains Mono', monospace" font-size="12" font-weight="600">LemonX / Multi-Agent Quality Assurance Orchestrator</text>
+  <rect x="620" y="30" width="145" height="24" rx="6" fill="#132438" stroke="#06b6d4" stroke-width="1" />
+  <circle cx="633" cy="42" r="3.5" fill="#10b981" />
+  <text x="644" y="46" fill="#38bdf8" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="bold">AUTONOMOUS RUN</text>
+
+  <!-- Agent Pipeline Nodes -->
+  <!-- Agent 1: Synthesis -->
+  <g transform="translate(40, 90)">
+    <rect width="160" height="110" rx="12" fill="url(#lx-card)" stroke="#8b5cf6" stroke-width="1.5" />
+    <circle cx="28" cy="28" r="10" fill="#2e1065" stroke="#a78bfa" stroke-width="1.5" />
+    <text x="28" y="32" text-anchor="middle" fill="#c084fc" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="bold">A1</text>
+    <text x="46" y="32" fill="#ffffff" font-family="'Space Grotesk', sans-serif" font-size="13" font-weight="bold">Synthesizer</text>
+    <text x="20" y="58" fill="#94a3b8" font-family="'JetBrains Mono', monospace" font-size="10">Inspects AST</text>
+    <text x="20" y="74" fill="#94a3b8" font-family="'JetBrains Mono', monospace" font-size="10">Generates Unit Specs</text>
+    <rect x="20" y="86" width="120" height="14" rx="3" fill="#1e1b4b" />
+    <rect x="20" y="86" width="105" height="14" rx="3" fill="#8b5cf6" opacity="0.6" />
+    <text x="80" y="97" text-anchor="middle" fill="#ffffff" font-family="'JetBrains Mono', monospace" font-size="9">88% Coverage</text>
+  </g>
+
+  <!-- Flow Arrow 1 -->
+  <path d="M208 145 H 230" stroke="#8b5cf6" stroke-width="2" stroke-dasharray="4 2" />
+
+  <!-- Agent 2: Execution -->
+  <g transform="translate(235, 90)">
+    <rect width="160" height="110" rx="12" fill="url(#lx-card)" stroke="#06b6d4" stroke-width="1.5" />
+    <circle cx="28" cy="28" r="10" fill="#083344" stroke="#38bdf8" stroke-width="1.5" />
+    <text x="28" y="32" text-anchor="middle" fill="#38bdf8" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="bold">A2</text>
+    <text x="46" y="32" fill="#ffffff" font-family="'Space Grotesk', sans-serif" font-size="13" font-weight="bold">Runner and E2E</text>
+    <text x="20" y="58" fill="#94a3b8" font-family="'JetBrains Mono', monospace" font-size="10">Vitest Test Suites</text>
+    <text x="20" y="74" fill="#94a3b8" font-family="'JetBrains Mono', monospace" font-size="10">Container Isolation</text>
+    <rect x="20" y="86" width="120" height="14" rx="3" fill="#042f2e" />
+    <rect x="20" y="86" width="120" height="14" rx="3" fill="#10b981" opacity="0.6" />
+    <text x="80" y="97" text-anchor="middle" fill="#ffffff" font-family="'JetBrains Mono', monospace" font-size="9">42/42 Passed</text>
+  </g>
+
+  <!-- Flow Arrow 2 -->
+  <path d="M403 145 H 425" stroke="#06b6d4" stroke-width="2" stroke-dasharray="4 2" />
+
+  <!-- Agent 3: Diagnosis -->
+  <g transform="translate(430, 90)">
+    <rect width="160" height="110" rx="12" fill="url(#lx-card)" stroke="#f59e0b" stroke-width="1.5" />
+    <circle cx="28" cy="28" r="10" fill="#451a03" stroke="#fbbf24" stroke-width="1.5" />
+    <text x="28" y="32" text-anchor="middle" fill="#fbbf24" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="bold">A3</text>
+    <text x="46" y="32" fill="#ffffff" font-family="'Space Grotesk', sans-serif" font-size="13" font-weight="bold">Diagnostic AI</text>
+    <text x="20" y="58" fill="#94a3b8" font-family="'JetBrains Mono', monospace" font-size="10">Stack Trace Parser</text>
+    <text x="20" y="74" fill="#94a3b8" font-family="'JetBrains Mono', monospace" font-size="10">Root Cause Localization</text>
+    <rect x="20" y="86" width="120" height="14" rx="3" fill="#451a03" />
+    <rect x="20" y="86" width="112" height="14" rx="3" fill="#f59e0b" opacity="0.6" />
+    <text x="80" y="97" text-anchor="middle" fill="#ffffff" font-family="'JetBrains Mono', monospace" font-size="9">Defect Localized</text>
+  </g>
+
+  <!-- Flow Arrow 3 -->
+  <path d="M598 145 H 620" stroke="#10b981" stroke-width="2" stroke-dasharray="4 2" />
+
+  <!-- Agent 4: Auto-Repair -->
+  <g transform="translate(625, 90)">
+    <rect width="140" height="110" rx="12" fill="url(#lx-card)" stroke="#10b981" stroke-width="1.5" />
+    <circle cx="28" cy="28" r="10" fill="#064e3b" stroke="#34d399" stroke-width="1.5" />
+    <text x="28" y="32" text-anchor="middle" fill="#34d399" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="bold">A4</text>
+    <text x="46" y="32" fill="#ffffff" font-family="'Space Grotesk', sans-serif" font-size="13" font-weight="bold">Repair Engine</text>
+    <text x="20" y="58" fill="#94a3b8" font-family="'JetBrains Mono', monospace" font-size="10">Patch Synthesis</text>
+    <text x="20" y="74" fill="#94a3b8" font-family="'JetBrains Mono', monospace" font-size="10">GitHub Actions PR</text>
+    <rect x="20" y="86" width="100" height="14" rx="3" fill="#064e3b" />
+    <rect x="20" y="86" width="100" height="14" rx="3" fill="#10b981" opacity="0.8" />
+    <text x="70" y="97" text-anchor="middle" fill="#ffffff" font-family="'JetBrains Mono', monospace" font-size="9">Auto PR Ready</text>
+  </g>
+
+  <!-- Bottom Console and Code Diff Area -->
+  <rect x="40" y="225" width="725" height="195" rx="12" fill="#080c18" stroke="#1e293d" stroke-width="1.5" />
+  <rect x="40" y="225" width="725" height="30" rx="12" fill="#0f172a" />
+  <text x="60" y="245" fill="#64748b" font-family="'JetBrains Mono', monospace" font-size="11">TERMINAL LOGS // VITEST RUNNER AND CLOUDFLARE AI WORKERS</text>
+
+  <!-- Terminal Snippet -->
+  <text x="60" y="280" fill="#10b981" font-family="'JetBrains Mono', monospace" font-size="11">[PASS] src/agents/planner.spec.ts (4 tests passed)</text>
+  <text x="60" y="300" fill="#10b981" font-family="'JetBrains Mono', monospace" font-size="11">[PASS] src/agents/executor.spec.ts (8 tests passed)</text>
+  <text x="60" y="320" fill="#38bdf8" font-family="'JetBrains Mono', monospace" font-size="11">[INFO] Cloudflare Workers AI: Synthesized 14 assertions in 184ms</text>
+  <text x="60" y="340" fill="#a78bfa" font-family="'JetBrains Mono', monospace" font-size="11">[PATCH] Generated regression-safe pull request #42 to branch main</text>
+
+  <!-- Diff Box -->
+  <g transform="translate(510, 270)">
+    <rect width="235" height="135" rx="8" fill="#050811" stroke="#334155" stroke-width="1" />
+    <text x="15" y="22" fill="#64748b" font-family="'JetBrains Mono', monospace" font-size="10">SYNTHESIZED CODE DIFF</text>
+    <rect x="10" y="32" width="215" height="22" fill="#7f1d1d" opacity="0.4" />
+    <text x="15" y="47" fill="#f87171" font-family="'JetBrains Mono', monospace" font-size="10">- const timeout = 1000;</text>
+    <rect x="10" y="58" width="215" height="22" fill="#14532d" opacity="0.4" />
+    <text x="15" y="73" fill="#4ade80" font-family="'JetBrains Mono', monospace" font-size="10">+ const timeout = Math.max(1000, opts.retries * 500);</text>
+    <text x="15" y="100" fill="#94a3b8" font-family="'JetBrains Mono', monospace" font-size="10">Multi-Agent Self-Heal: SUCCESS</text>
+    <text x="15" y="118" fill="#22d3ee" font-family="'JetBrains Mono', monospace" font-size="10">Deployment: Ready for CI/CD</text>
+  </g>
+</svg>

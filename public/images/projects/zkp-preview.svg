@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" fill="none">
+  <defs>
+    <linearGradient id="zkp-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a0c1a" />
+      <stop offset="100%" stop-color="#05060f" />
+    </linearGradient>
+    <linearGradient id="zkp-shield" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#8b5cf6" />
+      <stop offset="100%" stop-color="#3b82f6" />
+    </linearGradient>
+  </defs>
+
+  <rect width="800" height="450" rx="16" fill="url(#zkp-bg)" />
+  <rect x="1" y="1" width="798" height="448" rx="15" stroke="#1f293d" stroke-width="2" />
+
+  <!-- Header -->
+  <rect x="20" y="20" width="760" height="44" rx="10" fill="#0c1224" stroke="#25324d" stroke-width="1.5" />
+  <text x="40" y="47" fill="#818cf8" font-family="'Space Grotesk', sans-serif" font-size="14" font-weight="bold">Zero-Knowledge Proofs (Noir) &amp; Blockchain Verification</text>
+  <rect x="630" y="30" width="135" height="24" rx="6" fill="#132438" stroke="#06b6d4" stroke-width="1" />
+  <text x="697" y="46" text-anchor="middle" fill="#38bdf8" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="bold">ZK-SNARK VERIFIED</text>
+
+  <!-- Left: Cryptographic Flow & Patient Privacy Shield -->
+  <g transform="translate(40, 85)">
+    <rect width="340" height="330" rx="14" fill="#080e1e" stroke="#1f2c4a" stroke-width="1.5" />
+    <text x="20" y="30" fill="#94a3b8" font-family="'JetBrains Mono', monospace" font-size="11">PATIENT CONFIDENTIALITY BOUNDARY</text>
+
+    <!-- Shield Icon & Cryptography graphic -->
+    <path d="M170 55 L245 90 V170 C245 220, 170 255, 170 255 C170 255, 95 220, 95 170 V90 Z" fill="url(#zkp-shield)" opacity="0.25" stroke="#8b5cf6" stroke-width="2" />
+    <circle cx="170" cy="150" r="32" fill="#0f172a" stroke="#06b6d4" stroke-width="2" />
+    <path d="M160 150 L168 158 L184 142" stroke="#22d3ee" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+
+    <text x="170" y="280" text-anchor="middle" fill="#ffffff" font-family="'Space Grotesk', sans-serif" font-size="14" font-weight="bold">Zero Medical Data Leakage</text>
+    <text x="170" y="300" text-anchor="middle" fill="#64748b" font-family="'JetBrains Mono', monospace" font-size="10">Private Inputs Never Leave Client Browser</text>
+  </g>
+
+  <!-- Right: Noir Circuit & Smart Contract Pipeline -->
+  <g transform="translate(405, 85)">
+    <!-- Circuit Code Block -->
+    <rect width="355" height="180" rx="14" fill="#070a14" stroke="#1e293d" stroke-width="1.5" />
+    <rect x="0" y="0" width="355" height="30" rx="14" fill="#0e1424" />
+    <text x="20" y="20" fill="#94a3b8" font-family="'JetBrains Mono', monospace" font-size="11">noir_circuits/eligibility.nr</text>
+
+    <text x="20" y="55" fill="#f43f5e" font-family="'JetBrains Mono', monospace" font-size="11">fn main(</text>
+    <text x="40" y="75" fill="#e2e8f0" font-family="'JetBrains Mono', monospace" font-size="11">patient_biomarker: <tspan fill="#38bdf8">Field</tspan>, // Private</text>
+    <text x="40" y="95" fill="#e2e8f0" font-family="'JetBrains Mono', monospace" font-size="11">threshold_criteria: <tspan fill="#a78bfa">pub Field</tspan>, // Public</text>
+    <text x="40" y="115" fill="#e2e8f0" font-family="'JetBrains Mono', monospace" font-size="11">doctor_signature: <tspan fill="#38bdf8">Signature</tspan></text>
+    <text x="20" y="135" fill="#f43f5e" font-family="'JetBrains Mono', monospace" font-size="11">) {</text>
+    <text x="40" y="155" fill="#10b981" font-family="'JetBrains Mono', monospace" font-size="11">  constrain patient_biomarker &gt; threshold_criteria;</text>
+    <text x="20" y="170" fill="#f43f5e" font-family="'JetBrains Mono', monospace" font-size="11">}</text>
+
+    <!-- On-chain verification contract card -->
+    <g transform="translate(0, 195)">
+      <rect width="355" height="135" rx="14" fill="#091224" stroke="#06b6d4" stroke-width="1.5" />
+      <text x="20" y="28" fill="#38bdf8" font-family="'JetBrains Mono', monospace" font-size="11">ETHEREUM SMART CONTRACT VERIFIER</text>
+
+      <rect x="20" y="44" width="315" height="30" rx="6" fill="#04202e" stroke="#0891b2" stroke-width="1" />
+      <text x="32" y="63" fill="#a5f3fc" font-family="'JetBrains Mono', monospace" font-size="10">verifyProof(bytes calldata proof, uint256[] publicInputs)</text>
+
+      <g transform="translate(20, 85)">
+        <rect width="150" height="34" rx="6" fill="#14532d" opacity="0.3" stroke="#22c55e" stroke-width="1" />
+        <text x="75" y="106" text-anchor="middle" fill="#4ade80" font-family="'JetBrains Mono', monospace" font-size="10">✓ Proof Valid</text>
+      </g>
+
+      <g transform="translate(185, 85)">
+        <rect width="150" height="34" rx="6" fill="#1e1b4b" opacity="0.4" stroke="#818cf8" stroke-width="1" />
+        <text x="260" y="106" text-anchor="middle" fill="#c7d2fe" font-family="'JetBrains Mono', monospace" font-size="10">Trial Enrolled</text>
+      </g>
+    </g>
+  </g>
+</svg>

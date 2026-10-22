@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 320" fill="none">
+  <defs>
+    <linearGradient id="pub-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a0e1c" />
+      <stop offset="100%" stop-color="#04060c" />
+    </linearGradient>
+  </defs>
+
+  <rect width="900" height="320" rx="14" fill="url(#pub-bg)" stroke="#1e293d" stroke-width="1.5" />
+
+  <!-- Diagram Title -->
+  <text x="30" y="35" fill="#38bdf8" font-family="'JetBrains Mono', monospace" font-size="12" font-weight="bold">DOMAIN-AWARE SAM-ViT-B ARCHITECTURE FLOWCHART // SPRINGER CVR 2026</text>
+
+  <!-- Step 1: Input Multi-Modal MRI Volume -->
+  <g transform="translate(30, 60)">
+    <rect width="180" height="220" rx="10" fill="#080d1a" stroke="#06b6d4" stroke-width="1.5" />
+    <text x="90" y="30" text-anchor="middle" fill="#38bdf8" font-family="'Space Grotesk', sans-serif" font-size="12" font-weight="bold">Multi-Modal MRI</text>
+    <text x="90" y="46" text-anchor="middle" fill="#64748b" font-family="'JetBrains Mono', monospace" font-size="9">T1, T1ce, T2, FLAIR</text>
+
+    <!-- Mini MRI Scan -->
+    <ellipse cx="90" cy="115" rx="55" ry="48" fill="#111c33" stroke="#334155" stroke-width="1.5" />
+    <ellipse cx="105" cy="100" rx="16" ry="14" fill="#8b5cf6" opacity="0.6" stroke="#c084fc" />
+
+    <rect x="15" y="180" width="150" height="26" rx="5" fill="#0c182c" />
+    <text x="90" y="197" text-anchor="middle" fill="#94a3b8" font-family="'JetBrains Mono', monospace" font-size="9">Skull-Strip &amp; Z-Norm</text>
+  </g>
+
+  <!-- Flow 1 -->
+  <path d="M215 170 H 250" stroke="#06b6d4" stroke-width="2" stroke-dasharray="4 2" />
+
+  <!-- Step 2: Frozen ViT-B Backbone + Trainable Adapters -->
+  <g transform="translate(255, 60)">
+    <rect width="210" height="220" rx="10" fill="#080d1a" stroke="#8b5cf6" stroke-width="1.5" />
+    <text x="105" y="30" text-anchor="middle" fill="#c084fc" font-family="'Space Grotesk', sans-serif" font-size="12" font-weight="bold">SAM-ViT-B Encoder</text>
+    <text x="105" y="46" text-anchor="middle" fill="#64748b" font-family="'JetBrains Mono', monospace" font-size="9">Frozen Weights (308M)</text>
+
+    <!-- Transformer Blocks with Adapter Insertions -->
+    <rect x="20" y="65" width="170" height="30" rx="5" fill="#1e1b4b" stroke="#6366f1" stroke-width="1" />
+    <text x="105" y="84" text-anchor="middle" fill="#c7d2fe" font-family="'JetBrains Mono', monospace" font-size="10">Multi-Head Attention</text>
+
+    <rect x="30" y="105" width="150" height="26" rx="5" fill="#2e1065" stroke="#a855f7" stroke-width="1.5" />
+    <text x="105" y="122" text-anchor="middle" fill="#f0abfc" font-family="'JetBrains Mono', monospace" font-size="9">★ Medical Domain Adapter</text>
+
+    <rect x="20" y="140" width="170" height="30" rx="5" fill="#1e1b4b" stroke="#6366f1" stroke-width="1" />
+    <text x="105" y="159" text-anchor="middle" fill="#c7d2fe" font-family="'JetBrains Mono', monospace" font-size="10">Feed-Forward MLP</text>
+
+    <rect x="15" y="180" width="180" height="26" rx="5" fill="#13112c" />
+    <text x="105" y="197" text-anchor="middle" fill="#10b981" font-family="'JetBrains Mono', monospace" font-size="9">&lt; 3% Trainable Parameters</text>
+  </g>
+
+  <!-- Flow 2 -->
+  <path d="M470 170 H 505" stroke="#8b5cf6" stroke-width="2" stroke-dasharray="4 2" />
+
+  <!-- Step 3: Lightweight Mask Decoder -->
+  <g transform="translate(510, 60)">
+    <rect width="180" height="220" rx="10" fill="#080d1a" stroke="#10b981" stroke-width="1.5" />
+    <text x="90" y="30" text-anchor="middle" fill="#34d399" font-family="'Space Grotesk', sans-serif" font-size="12" font-weight="bold">Mask Decoder</text>
+    <text x="90" y="46" text-anchor="middle" fill="#64748b" font-family="'JetBrains Mono', monospace" font-size="9">Multi-Scale Skip Layers</text>
+
+    <rect x="20" y="70" width="140" height="40" rx="6" fill="#064e3b" opacity="0.4" stroke="#10b981" stroke-width="1" />
+    <text x="90" y="94" text-anchor="middle" fill="#6ee7b7" font-family="'JetBrains Mono', monospace" font-size="10">Cross-Attention</text>
+
+    <rect x="20" y="120" width="140" height="40" rx="6" fill="#064e3b" opacity="0.4" stroke="#10b981" stroke-width="1" />
+    <text x="90" y="144" text-anchor="middle" fill="#6ee7b7" font-family="'JetBrains Mono', monospace" font-size="10">Dice + BCE Loss</text>
+
+    <rect x="15" y="180" width="150" height="26" rx="5" fill="#052e24" />
+    <text x="90" y="197" text-anchor="middle" fill="#a7f3d0" font-family="'JetBrains Mono', monospace" font-size="9">Fast GPU Inference</text>
+  </g>
+
+  <!-- Flow 3 -->
+  <path d="M695 170 H 730" stroke="#10b981" stroke-width="2" stroke-dasharray="4 2" />
+
+  <!-- Step 4: Segmentation Output -->
+  <g transform="translate(735, 60)">
+    <rect width="135" height="220" rx="10" fill="#080d1a" stroke="#38bdf8" stroke-width="1.5" />
+    <text x="67" y="30" text-anchor="middle" fill="#38bdf8" font-family="'Space Grotesk', sans-serif" font-size="12" font-weight="bold">Output Mask</text>
+    <text x="67" y="46" text-anchor="middle" fill="#64748b" font-family="'JetBrains Mono', monospace" font-size="9">Dice: 0.9864</text>
+
+    <ellipse cx="67" cy="115" rx="45" ry="40" fill="#0c182c" stroke="#334155" stroke-width="1" />
+    <ellipse cx="80" cy="100" rx="18" ry="16" fill="#10b981" opacity="0.8" stroke="#34d399" stroke-width="2" />
+
+    <rect x="15" y="180" width="105" height="26" rx="5" fill="#0c2333" />
+    <text x="67" y="197" text-anchor="middle" fill="#38bdf8" font-family="'JetBrains Mono', monospace" font-size="9">High Precision</text>
+  </g>
+</svg>

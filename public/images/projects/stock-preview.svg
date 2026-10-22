@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" fill="none">
+  <defs>
+    <linearGradient id="stk-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#070c18" />
+      <stop offset="100%" stop-color="#03060c" />
+    </linearGradient>
+  </defs>
+
+  <rect width="800" height="450" rx="16" fill="url(#stk-bg)" />
+  <rect x="1" y="1" width="798" height="448" rx="15" stroke="#1f293d" stroke-width="2" />
+
+  <!-- Header -->
+  <rect x="20" y="20" width="760" height="44" rx="10" fill="#0c1224" stroke="#25324d" stroke-width="1.5" />
+  <text x="40" y="47" fill="#38bdf8" font-family="'Space Grotesk', sans-serif" font-size="14" font-weight="bold">Python Financial Market Analytics &amp; Visualizer</text>
+  <text x="380" y="46" fill="#64748b" font-family="'JetBrains Mono', monospace" font-size="11">yfinance • Matplotlib • Pandas • Tkinter</text>
+
+  <!-- Candlestick Chart Simulation -->
+  <g transform="translate(40, 85)">
+    <rect width="720" height="330" rx="14" fill="#080e1c" stroke="#1c2842" stroke-width="1.5" />
+    
+    <!-- Grid -->
+    <path d="M40 70H680M40 140H680M40 210H680M40 280H680" stroke="#121b2d" stroke-width="1" />
+    <path d="M140 30V300M260 30V300M380 30V300M500 30V300M620 30V300" stroke="#121b2d" stroke-width="1" />
+
+    <!-- Candlesticks -->
+    <!-- Bar 1 (Up - Green) -->
+    <line x1="80" y1="180" x2="80" y2="240" stroke="#10b981" stroke-width="2" />
+    <rect x="72" y="195" width="16" height="30" fill="#10b981" rx="2" />
+
+    <!-- Bar 2 (Up - Green) -->
+    <line x1="130" y1="160" x2="130" y2="225" stroke="#10b981" stroke-width="2" />
+    <rect x="122" y="175" width="16" height="35" fill="#10b981" rx="2" />
+
+    <!-- Bar 3 (Down - Red) -->
+    <line x1="180" y1="150" x2="180" y2="210" stroke="#f43f5e" stroke-width="2" />
+    <rect x="172" y="165" width="16" height="25" fill="#f43f5e" rx="2" />
+
+    <!-- Bar 4 (Up - Green) -->
+    <line x1="230" y1="130" x2="230" y2="190" stroke="#10b981" stroke-width="2" />
+    <rect x="222" y="140" width="16" height="40" fill="#10b981" rx="2" />
+
+    <!-- Bar 5 (Up - Green) -->
+    <line x1="280" y1="110" x2="280" y2="165" stroke="#10b981" stroke-width="2" />
+    <rect x="272" y="125" width="16" height="30" fill="#10b981" rx="2" />
+
+    <!-- Bar 6 (Down - Red) -->
+    <line x1="330" y1="115" x2="330" y2="175" stroke="#f43f5e" stroke-width="2" />
+    <rect x="322" y="130" width="16" height="30" fill="#f43f5e" rx="2" />
+
+    <!-- Bar 7 (Up - Green) -->
+    <line x1="380" y1="90" x2="380" y2="150" stroke="#10b981" stroke-width="2" />
+    <rect x="372" y="105" width="16" height="35" fill="#10b981" rx="2" />
+
+    <!-- Bar 8 (Up - Green) -->
+    <line x1="430" y1="70" x2="430" y2="130" stroke="#10b981" stroke-width="2" />
+    <rect x="422" y="80" width="16" height="40" fill="#10b981" rx="2" />
+
+    <!-- Bar 9 (Down - Red) -->
+    <line x1="480" y1="80" x2="480" y2="140" stroke="#f43f5e" stroke-width="2" />
+    <rect x="472" y="90" width="16" height="25" fill="#f43f5e" rx="2" />
+
+    <!-- Bar 10 (Up - Green) -->
+    <line x1="530" y1="60" x2="530" y2="110" stroke="#10b981" stroke-width="2" />
+    <rect x="522" y="70" width="16" height="30" fill="#10b981" rx="2" />
+
+    <!-- Bar 11 (Up - Green) -->
+    <line x1="580" y1="45" x2="580" y2="95" stroke="#10b981" stroke-width="2" />
+    <rect x="572" y="55" width="16" height="30" fill="#10b981" rx="2" />
+
+    <!-- Bar 12 (Up - Green) -->
+    <line x1="630" y1="35" x2="630" y2="85" stroke="#10b981" stroke-width="2" />
+    <rect x="622" y="45" width="16" height="30" fill="#10b981" rx="2" />
+
+    <!-- Moving Average SMA Lines -->
+    <path d="M80 210 Q 180 180, 280 140 T 480 100 T 630 60" fill="none" stroke="#38bdf8" stroke-width="3" />
+    <path d="M80 230 Q 180 210, 280 170 T 480 130 T 630 85" fill="none" stroke="#a78bfa" stroke-width="2" stroke-dasharray="4 2" />
+
+    <!-- Legend -->
+    <rect x="40" y="290" width="160" height="26" rx="6" fill="#0b1122" />
+    <circle cx="55" cy="303" r="4" fill="#38bdf8" />
+    <text x="65" y="307" fill="#94a3b8" font-family="'JetBrains Mono', monospace" font-size="10">SMA (20)</text>
+    <circle cx="125" cy="303" r="4" fill="#a78bfa" />
+    <text x="135" y="307" fill="#94a3b8" font-family="'JetBrains Mono', monospace" font-size="10">EMA (50)</text>
+  </g>
+</svg>
