@@ -1,6 +1,6 @@
 # Nikhil Kumar — Personal Portfolio & Research Showcase
 
-An award-winning, futuristic, animation-rich personal portfolio website built for **Nikhil Kumar** — Computer Science & Cybersecurity undergraduate at SRM University–AP (2023–2027), software developer, AI/ML researcher, and agentic AI engineer.
+Nikhil Kumar — Computer Science & Cybersecurity undergraduate at SRM University–AP (2023–2027), software developer, AI/ML researcher, and agentic AI engineer.
 
 Designed with a high-tech dark aesthetic: near-black canvas, electric violet, cyan neon glows, glassmorphism, fluid micro-interactions, and verified technical credentials.
 
