@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import { motion, useMotionValue, useSpring, useTransform, AnimatePresence } from 'framer-motion';
+import { useState } from 'react';
+import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import { 
   ArrowRight, 
   Download, 
@@ -15,31 +15,10 @@ import { PORTFOLIO_DATA } from '../data/portfolio';
 import { GithubIcon, LinkedinIcon } from './SocialIcons';
 import { BorderBeam } from './BorderBeam';
 import { MagneticButton } from './MagneticButton';
-import { GoogleMeetIcon } from './GoogleMeetIcon';
 
-interface HeroProps {
-  onOpenScheduler: () => void;
-}
-
-const ROTATING_HEADLINES = [
-  { prefix: "Building", highlight: "Intelligent Systems.", suffix: "Engineering What's Next." },
-  { prefix: "Orchestrating", highlight: "Multi-Agent AI.", suffix: "Autonomous Test & Repair." },
-  { prefix: "Fine-Tuning", highlight: "Vision Transformers.", suffix: "Medical MRI Precision." },
-  { prefix: "Engineering", highlight: "Resilient Software.", suffix: "Zero-Knowledge Security." },
-];
-
-export const Hero = ({ onOpenScheduler }: HeroProps) => {
+export const Hero = () => {
   const { personal, hero } = PORTFOLIO_DATA;
   const [imageError, setImageError] = useState(false);
-  const [headlineIndex, setHeadlineIndex] = useState(0);
-
-  // Rotating Headline Interval
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setHeadlineIndex((prev) => (prev + 1) % ROTATING_HEADLINES.length);
-    }, 4000);
-    return () => clearInterval(timer);
-  }, []);
 
   // 3D Perspective Tilt on portrait hover
   const x = useMotionValue(0);
@@ -98,31 +77,11 @@ export const Hero = ({ onOpenScheduler }: HeroProps) => {
               </span>
             </div>
 
-            {/* Main Dynamic Headline with AnimatePresence */}
-            <div className="min-h-[140px] sm:min-h-[160px] lg:min-h-[180px] flex items-center mb-4">
-              <AnimatePresence mode="wait">
-                <motion.h1
-                  key={headlineIndex}
-                  initial={{ opacity: 0, y: 20, filter: 'blur(8px)' }}
-                  animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-                  exit={{ opacity: 0, y: -20, filter: 'blur(8px)' }}
-                  transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                  className="font-heading text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-[1.12]"
-                >
-                  {ROTATING_HEADLINES[headlineIndex].prefix}{' '}
-                  <span className="bg-clip-text text-transparent bg-gradient-to-r from-violet-400 via-cyan-300 to-emerald-400 animate-shimmer bg-[length:200%_auto]">
-                    {ROTATING_HEADLINES[headlineIndex].highlight}
-                  </span>
-                  <br />
-                  <span className="text-slate-100 hover:text-cyan-200 transition-colors">
-                    {ROTATING_HEADLINES[headlineIndex].suffix}
-                  </span>
-                </motion.h1>
-              </AnimatePresence>
-            </div>
+            {/* Accessible Single H1 for SEO */}
+            <h1 className="sr-only">Nikhil Kumar — Software Developer & AI/ML Researcher</h1>
 
             {/* Introduction and Supporting Narrative */}
-            <p className="font-sans text-base sm:text-lg text-slate-300 font-normal leading-relaxed mb-3 max-w-2xl">
+            <p className="font-sans text-xl sm:text-2xl text-slate-100 font-medium leading-relaxed mb-4 max-w-2xl">
               {hero.bio}
             </p>
             <p className="font-sans text-sm sm:text-base text-slate-400 leading-relaxed mb-6 max-w-2xl">
@@ -148,16 +107,6 @@ export const Hero = ({ onOpenScheduler }: HeroProps) => {
                 </a>
               </MagneticButton>
 
-              {/* Schedule Google Meet */}
-              <MagneticButton strength={0.25}>
-                <button
-                  onClick={onOpenScheduler}
-                  className="flex items-center justify-center gap-2 rounded-xl border border-emerald-500/40 bg-emerald-950/30 px-5 py-3 text-sm font-semibold text-emerald-200 backdrop-blur-sm transition-all hover:bg-emerald-900/40 hover:border-emerald-400 hover:text-white hover:scale-[1.03] active:scale-[0.98] shadow-[0_0_20px_rgba(0,172,71,0.25)]"
-                >
-                  <GoogleMeetIcon className="h-4 w-4" />
-                  <span>Schedule Google Meet</span>
-                </button>
-              </MagneticButton>
 
               {/* Download Resume Button */}
               <div className="flex items-center gap-1.5">

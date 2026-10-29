@@ -206,7 +206,7 @@ export const InteractiveTerminal = () => {
         </div>
 
         {/* Console Container */}
-        <div className="relative rounded-3xl border border-violet-500/30 bg-[#070a14] shadow-[0_0_50px_rgba(139,92,246,0.15)] overflow-hidden">
+        <div className="terminal-window relative rounded-3xl border border-violet-500/30 bg-[#070a14] shadow-[0_0_50px_rgba(139,92,246,0.15)] overflow-hidden">
           
           {/* Top Window Bar */}
           <div className="flex flex-wrap items-center justify-between border-b border-slate-800 bg-slate-950/90 px-4 py-3 gap-3">

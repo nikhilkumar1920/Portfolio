@@ -40,16 +40,16 @@ export const About = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="lg:col-span-7 flex flex-col gap-5 text-slate-300 font-sans text-base leading-relaxed"
+            className="lg:col-span-7 flex flex-col gap-5 text-slate-300 font-sans text-base sm:text-[16px] leading-relaxed"
           >
             {about.paragraphs.map((para, i) => (
-              <p key={i} className="text-slate-300 leading-relaxed">
+              <p key={i} className="text-slate-300/90 leading-relaxed tracking-normal">
                 {para}
               </p>
             ))}
 
             {/* Quick Context Highlights */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4 pt-4 border-t border-slate-800">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-2 pt-4 border-t border-slate-800/80">
               <div className="flex items-center gap-3 glass-card rounded-xl p-3 border border-slate-800">
                 <GraduationCap className="h-5 w-5 text-cyan-400 shrink-0" />
                 <div>
@@ -57,7 +57,7 @@ export const About = () => {
                     {personal.education.institution}
                   </div>
                   <div className="font-mono text-[11px] text-slate-400">
-                    B.Tech CS & Cybersecurity • CGPA {personal.education.cgpa}
+                    B.Tech CS & Cybersecurity • {personal.education.period}
                   </div>
                 </div>
               </div>

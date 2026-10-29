@@ -16,17 +16,15 @@ import { Experience } from './components/Experience';
 import { Achievements } from './components/Achievements';
 import { Contact } from './components/Contact';
 import { Footer } from './components/Footer';
-import { MeetingSchedulerModal } from './components/MeetingSchedulerModal';
 import { useTheme } from './hooks/useTheme';
 
 export function App() {
   const [loadingComplete, setLoadingComplete] = useState(false);
-  const [isSchedulerOpen, setIsSchedulerOpen] = useState(false);
   const { theme, toggleTheme } = useTheme();
   const { scrollYProgress } = useScroll();
 
   return (
-    <div className="relative min-h-screen bg-[#05070d] text-slate-100 selection:bg-violet-600/30 selection:text-cyan-300 font-sans overflow-x-hidden">
+    <div className="relative min-h-screen bg-[var(--color-bg)] text-[var(--color-text-main)] selection:bg-violet-600/30 selection:text-cyan-300 font-sans overflow-x-hidden transition-colors duration-300">
       {/* Cinematic Introduction Loader */}
       {!loadingComplete && (
         <PageLoader onComplete={() => setLoadingComplete(true)} />
@@ -46,14 +44,13 @@ export function App() {
 
       {/* Navigation Bar */}
       <Navbar
-        onOpenScheduler={() => setIsSchedulerOpen(true)}
         theme={theme}
         onToggleTheme={toggleTheme}
       />
 
       {/* Main Content Layout */}
       <main className="relative z-10 flex flex-col">
-        <Hero onOpenScheduler={() => setIsSchedulerOpen(true)} />
+        <Hero />
         <About />
         <Skills />
         <Projects />
@@ -63,17 +60,11 @@ export function App() {
         <Research />
         <Experience />
         <Achievements />
-        <Contact onOpenScheduler={() => setIsSchedulerOpen(true)} />
+        <Contact />
       </main>
 
       {/* Footer */}
       <Footer />
-
-      {/* Interactive Meeting Scheduler Modal */}
-      <MeetingSchedulerModal
-        isOpen={isSchedulerOpen}
-        onClose={() => setIsSchedulerOpen(false)}
-      />
     </div>
   );
 }

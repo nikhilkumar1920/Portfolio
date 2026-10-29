@@ -23,13 +23,13 @@ interface GithubRepo {
   fork: boolean;
 }
 
-// Fallback repositories if GitHub API is rate-limited or offline
+// Fallback repositories showcasing best GitHub projects with original links
 const FALLBACK_REPOS: GithubRepo[] = [
   {
     id: 101,
-    name: 'LemonX',
-    description: 'An AI-driven software testing platform designed to autonomously generate, execute, analyze, and repair unit, integration, and e2e tests.',
-    html_url: 'https://github.com/nikhilkumar1920/LemonX',
+    name: 'lemon.ai',
+    description: 'An AI-driven software testing platform designed to autonomously generate, execute, analyze, and repair unit, integration, and E2E tests.',
+    html_url: 'https://github.com/nikhilkumar1920/lemon.ai',
     language: 'TypeScript',
     stargazers_count: 0,
     forks_count: 0,
@@ -38,20 +38,42 @@ const FALLBACK_REPOS: GithubRepo[] = [
   },
   {
     id: 102,
-    name: 'Brain-Tumor-Segmentation-SAM',
-    description: 'Domain-aware adaptation of Segment Anything Model (SAM-ViT-B) for Glioma tumor delineation in MRI scans.',
-    html_url: 'https://github.com/nikhilkumar1920',
+    name: 'voice-ai-orchestrator',
+    description: 'An AI-powered multi-tenant Voice SaaS platform that automates outbound lead qualification calls using Vapi AI, LangGraph, FastAPI, MongoDB Atlas, React, and Docker.',
+    html_url: 'https://github.com/nikhilkumar1920/voice-ai-orchestrator',
     language: 'Python',
     stargazers_count: 0,
     forks_count: 0,
-    updated_at: '2026-09-28T00:00:00Z',
+    updated_at: '2026-10-10T00:00:00Z',
     fork: false,
   },
   {
     id: 103,
-    name: 'ZKP-Medical-Trial-Verification',
-    description: 'Privacy-preserving medical trial eligibility verification using Noir Zero-Knowledge Proofs and Ethereum contracts.',
-    html_url: 'https://github.com/nikhilkumar1920',
+    name: 'Linkplease',
+    description: 'Production-ready DM automation service with FastAPI, PostgreSQL, Celery, and Redis with HMAC webhook verification, deduplication, retries, and delivery reconciliation.',
+    html_url: 'https://github.com/nikhilkumar1920/Linkplease',
+    language: 'Python',
+    stargazers_count: 0,
+    forks_count: 0,
+    updated_at: '2026-09-25T00:00:00Z',
+    fork: false,
+  },
+  {
+    id: 104,
+    name: 'lenny-growth-assistant',
+    description: 'A grounded product and growth workspace built from podcast transcripts using RAG, LLM multi-provider abstraction, and interactive document artifact rendering.',
+    html_url: 'https://github.com/nikhilkumar1920/lenny-growth-assistant',
+    language: 'Python',
+    stargazers_count: 0,
+    forks_count: 0,
+    updated_at: '2026-09-01T00:00:00Z',
+    fork: false,
+  },
+  {
+    id: 105,
+    name: 'ZKP-BASED-MEDICAL-TRIAL-ELIGIBILITY-VERIFICATION-BY-BLOCKCHAIN',
+    description: 'Privacy-preserving medical trial eligibility verification system using Zero-Knowledge Proofs, digital signatures, and blockchain-based verification.',
+    html_url: 'https://github.com/nikhilkumar1920/ZKP-BASED-MEDICAL-TRIAL-ELIGIBILITY-VERIFICATION-BY-BLOCKCHAIN',
     language: 'Noir',
     stargazers_count: 0,
     forks_count: 0,
@@ -59,16 +81,86 @@ const FALLBACK_REPOS: GithubRepo[] = [
     fork: false,
   },
   {
-    id: 104,
-    name: 'Stock-Market-Visualizer',
-    description: 'Desktop equity technical analysis visualization tool with Tkinter, yfinance, and Matplotlib.',
-    html_url: 'https://github.com/nikhilkumar1920',
+    id: 106,
+    name: 'Heart-Disease-Prediction',
+    description: 'Heart disease detection and diagnostic risk prediction using various machine learning and classification algorithms.',
+    html_url: 'https://github.com/nikhilkumar1920/Heart-Disease-Prediction',
+    language: 'Python',
+    stargazers_count: 0,
+    forks_count: 0,
+    updated_at: '2026-07-20T00:00:00Z',
+    fork: false,
+  },
+  {
+    id: 107,
+    name: 'stockprediction-',
+    description: 'Interactive stock market trend and equity technical analysis desktop application using Python, financial data APIs, and Matplotlib.',
+    html_url: 'https://github.com/nikhilkumar1920/stockprediction-',
     language: 'Python',
     stargazers_count: 0,
     forks_count: 0,
     updated_at: '2026-06-20T00:00:00Z',
     fork: false,
   },
+  {
+    id: 108,
+    name: 'wedding-planner',
+    description: 'Matrimonial web platform clone with personalized matchmaking tools, advanced partner search filters, and secure real-time messaging.',
+    html_url: 'https://github.com/nikhilkumar1920/wedding-planner',
+    language: 'PHP',
+    stargazers_count: 0,
+    forks_count: 0,
+    updated_at: '2026-05-15T00:00:00Z',
+    fork: false,
+  },
+];
+
+const REPO_DESCRIPTIONS: Record<string, string> = {
+  'lemon.ai': 'An agentic AI software testing platform designed to autonomously generate, execute, and repair unit, integration, and E2E tests for TypeScript/JavaScript codebases.',
+  'voice-ai-orchestrator': 'An AI-powered multi-tenant Voice SaaS platform that automates outbound lead qualification calls using Vapi AI, LangGraph, FastAPI, MongoDB Atlas, React, and Docker.',
+  'Linkplease': 'Production-ready DM automation service with FastAPI, PostgreSQL, Celery, and Redis with webhook signature verification, deduplication, retries, and delivery reconciliation.',
+  'lenny-growth-assistant': 'A grounded product and growth workspace built from podcast transcripts using RAG, LLM multi-provider abstraction, and interactive document artifact rendering.',
+  'ZKP-BASED-MEDICAL-TRIAL-ELIGIBILITY-VERIFICATION-BY-BLOCKCHAIN': 'Privacy-preserving medical trial eligibility verification system using Zero-Knowledge Proofs, digital signatures, and blockchain-based verification.',
+  'Heart-Disease-Prediction': 'Heart disease detection and diagnostic risk prediction using various machine learning and classification algorithms on clinical datasets.',
+  'stockprediction-': 'Desktop stock market visualization and price prediction dashboard built with Python, financial time-series APIs, and Matplotlib.',
+  'wedding-planner': 'Matrimonial full-stack web application with user profiles, partner search with advanced filters, and secure real-time messaging.',
+  'web-security': 'Security testing workbench and vulnerability demonstration scripts exploring common web application threats and defenses.',
+  'airline-management': 'C++ airline ticketing, reservation, passenger flight management system with object-oriented software engineering principles.',
+  'backend-auth': 'Secure backend authentication system implementing JWT access tokens, refresh tokens, role-based access control, and password hashing.',
+};
+
+const IGNORED_REPOS = new Set([
+  '111',
+  'superman--api',
+  'supermanapi',
+  'random-api',
+  'Games',
+  'AP23110010119',
+  'AP23110010119_',
+  'snippet',
+  'nikhilkumar1920',
+  'joke-api-',
+  'TO-DO-LIST',
+  'case-study',
+  'amazon-prime-landing-page-',
+  'skill-swap',
+  'e-com',
+  'machine-learning'
+]);
+
+const PRIORITY_ORDER = [
+  'lemon.ai',
+  'voice-ai-orchestrator',
+  'Linkplease',
+  'lenny-growth-assistant',
+  'ZKP-BASED-MEDICAL-TRIAL-ELIGIBILITY-VERIFICATION-BY-BLOCKCHAIN',
+  'Heart-Disease-Prediction',
+  'stockprediction-',
+  'wedding-planner',
+  'web-security',
+  'airline-management',
+  'backend-auth',
+  'gen-ai'
 ];
 
 const LANGUAGE_COLORS: Record<string, string> = {
@@ -80,6 +172,8 @@ const LANGUAGE_COLORS: Record<string, string> = {
   HTML: '#e34c26',
   CSS: '#563d7c',
   Noir: '#8b5cf6',
+  PHP: '#4f5d95',
+  'Jupyter Notebook': '#da5b0b',
   Default: '#64748b',
 };
 
@@ -95,7 +189,7 @@ export const GitHubProjects = () => {
     setIsFallback(false);
     try {
       const response = await fetch(
-        `https://api.github.com/users/${personal.socials.githubUsername}/repos?sort=updated&per_page=12`,
+        `https://api.github.com/users/${personal.socials.githubUsername}/repos?per_page=100`,
         { headers: { Accept: 'application/vnd.github.v3+json' } }
       );
 
@@ -104,9 +198,37 @@ export const GitHubProjects = () => {
       }
 
       const data: GithubRepo[] = await response.json();
-      // Filter out forks if preferred, or keep non-empty repositories
-      const nonForked = data.filter((r) => !r.fork);
-      setRepos(nonForked.length > 0 ? nonForked : data);
+      
+      // Filter out forks, ignored placeholder repos, and excluded repos
+      const isIgnored = (name: string) => {
+        const lower = name.toLowerCase().trim();
+        return (
+          IGNORED_REPOS.has(name) ||
+          IGNORED_REPOS.has(lower) ||
+          lower === 'skill-swap' ||
+          lower === 'e-com' ||
+          lower === 'machine-learning'
+        );
+      };
+
+      const filtered = data
+        .filter((r) => !r.fork && !isIgnored(r.name))
+        .map((r) => ({
+          ...r,
+          description: r.description || REPO_DESCRIPTIONS[r.name] || 'Source code and technical implementation on GitHub.',
+        }));
+
+      // Sort so priority best projects appear first
+      filtered.sort((a, b) => {
+        const indexA = PRIORITY_ORDER.indexOf(a.name);
+        const indexB = PRIORITY_ORDER.indexOf(b.name);
+        if (indexA !== -1 && indexB !== -1) return indexA - indexB;
+        if (indexA !== -1) return -1;
+        if (indexB !== -1) return 1;
+        return (b.stargazers_count || 0) - (a.stargazers_count || 0);
+      });
+
+      setRepos(filtered.length > 0 ? filtered : FALLBACK_REPOS);
     } catch (err) {
       console.warn('GitHub API rate limited or unreachable. Using fallback portfolio data.', err);
       setRepos(FALLBACK_REPOS);

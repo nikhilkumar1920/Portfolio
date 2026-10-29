@@ -9,10 +9,8 @@ import {
   ExternalLink 
 } from 'lucide-react';
 import { PORTFOLIO_DATA } from '../data/portfolio';
-import { GoogleMeetIcon } from './GoogleMeetIcon';
 
 interface NavbarProps {
-  onOpenScheduler: () => void;
   theme: 'dark' | 'light';
   onToggleTheme: () => void;
 }
@@ -30,7 +28,7 @@ const NAV_LINKS = [
   { name: 'Contact', href: '#contact' },
 ];
 
-export const Navbar = ({ onOpenScheduler, theme, onToggleTheme }: NavbarProps) => {
+export const Navbar = ({ theme, onToggleTheme }: NavbarProps) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
@@ -136,17 +134,6 @@ export const Navbar = ({ onOpenScheduler, theme, onToggleTheme }: NavbarProps) =
               <span>Resume</span>
             </a>
 
-            {/* Schedule Google Meet Button */}
-            <button
-              onClick={onOpenScheduler}
-              className="relative group overflow-hidden rounded-lg bg-gradient-to-r from-emerald-600 via-teal-600 to-cyan-600 px-3.5 py-1.5 font-mono text-xs font-semibold text-white shadow-[0_0_20px_rgba(0,172,71,0.35)] transition-all hover:shadow-[0_0_25px_rgba(0,172,71,0.55)] hover:scale-[1.02] active:scale-[0.98]"
-            >
-              <span className="relative z-10 flex items-center gap-1.5">
-                <GoogleMeetIcon className="h-3.5 w-3.5" />
-                <span>Google Meet</span>
-              </span>
-              <div className="absolute inset-0 bg-gradient-to-r from-cyan-600 via-teal-600 to-emerald-600 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-            </button>
           </div>
 
           {/* Mobile Hamburger Button */}
@@ -195,17 +182,7 @@ export const Navbar = ({ onOpenScheduler, theme, onToggleTheme }: NavbarProps) =
                 </a>
               ))}
 
-              <div className="mt-4 pt-4 border-t border-slate-800 flex flex-col gap-2.5">
-                <button
-                  onClick={() => {
-                    setMobileMenuOpen(false);
-                    onOpenScheduler();
-                  }}
-                  className="flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 py-2.5 text-xs font-semibold text-white shadow-lg"
-                >
-                  <GoogleMeetIcon className="h-4 w-4" />
-                  <span>Schedule Google Meet</span>
-                </button>
+              <div className="mt-4 pt-4 border-t border-slate-800">
 
                 <div className="grid grid-cols-2 gap-2">
                   <a

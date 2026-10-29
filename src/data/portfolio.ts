@@ -30,6 +30,9 @@ export interface SkillCategory {
   iconName: string;
   skills: string[];
   accentColor: string;
+  group?: string;
+  badge?: string;
+  description?: string;
 }
 
 export interface ProjectMetric {
@@ -62,6 +65,7 @@ export interface LeetCodeStatsData {
   medium: number;
   hard: number;
   acceptanceRate?: string;
+  ranking?: string | number;
   lastUpdated: string;
   profileUrl: string;
 }
@@ -195,8 +199,9 @@ export const PORTFOLIO_DATA: {
   about: {
     headline: "A little about me.",
     paragraphs: [
-      "I am an undergraduate in Cybersecurity and Computer Science at SRM University–AP (2023–2027) with a CGPA of 8.00. My technical focus spans across software engineering, artificial intelligence, cybersecurity, and automated quality engineering.",
-      "Rather than treating engineering and research as separate silos, I enjoy building practical systems that unite rigorous machine learning research with scalable, dependable software engineering. Whether designing autonomous agentic testing workflows, adapting vision foundation models for clinical MRI segmentation, or engineering zero-knowledge verification protocols, I build with precision and purpose."
+      "I'm Nikhil Kumar, a Computer Science and Cybersecurity undergraduate at SRM University–AP (2023–2027), passionate about building intelligent, secure, and scalable software systems.",
+      "My work spans software engineering, Agentic AI, automated software testing, cybersecurity, and deep learning. I enjoy turning complex ideas into practical solutions—from autonomous AI testing platforms and privacy-preserving blockchain applications to transformer-based medical image segmentation.",
+      "I combine research-driven problem-solving with hands-on engineering to build systems that are reliable, efficient, and impactful. I'm continuously exploring new technologies, strengthening my engineering skills, and building projects that solve real-world problems."
     ],
     pillars: [
       {
@@ -225,109 +230,217 @@ export const PORTFOLIO_DATA: {
 
   skills: [
     {
-      title: "Frontend",
-      iconName: "Layout",
-      accentColor: "from-violet-500 to-indigo-500",
-      skills: [
-        "HTML5",
-        "CSS3",
-        "JavaScript",
-        "TypeScript",
-        "React.js",
-        "Tailwind CSS",
-        "Responsive Web Design"
-      ]
-    },
-    {
-      title: "Backend",
-      iconName: "Server",
-      accentColor: "from-cyan-500 to-blue-500",
-      skills: [
-        "Node.js",
-        "Express.js",
-        "FastAPI",
-        "REST APIs",
-        "JSON",
-        "JWT Authentication"
-      ]
-    },
-    {
-      title: "Programming",
+      title: "Programming Languages",
       iconName: "Terminal",
       accentColor: "from-emerald-500 to-teal-500",
+      group: "Languages",
+      badge: "Core Stack",
+      description: "Systems programming, backend scripting, typed application engineering, and query design.",
       skills: [
         "Python",
         "Java",
+        "C",
         "C++",
+        "JavaScript",
+        "TypeScript",
         "SQL",
         "Bash"
       ]
     },
     {
-      title: "AI & Machine Learning",
+      title: "AI and Machine Learning",
       iconName: "BrainCircuit",
       accentColor: "from-purple-500 to-pink-500",
+      group: "AI & Research",
+      badge: "Core Discipline",
+      description: "Deep learning models, vision architectures, agentic orchestration, and LLM reasoning pipelines.",
       skills: [
+        "Machine Learning",
+        "Deep Learning",
         "PyTorch",
         "TensorFlow",
         "Computer Vision",
-        "Deep Learning",
-        "Medical Image Segmentation",
-        "Agentic AI"
+        "Vision Transformers",
+        "Generative AI",
+        "Large Language Models (LLMs)",
+        "Retrieval-Augmented Generation (RAG)",
+        "Agentic AI",
+        "Multi-Agent Systems",
+        "Prompt Engineering",
+        "LangGraph"
       ]
     },
     {
-      title: "Testing & Automation",
-      iconName: "CheckCircle2",
+      title: "Backend Development",
+      iconName: "Server",
+      accentColor: "from-cyan-500 to-blue-500",
+      group: "Engineering",
+      badge: "APIs & Services",
+      description: "Asynchronous services, robust REST APIs, token authentication, and microservice architectures.",
+      skills: [
+        "Python",
+        "FastAPI",
+        "Flask",
+        "Node.js",
+        "Express.js",
+        "REST APIs",
+        "JSON",
+        "JWT Authentication",
+        "Asynchronous Programming"
+      ]
+    },
+    {
+      title: "Frontend Development",
+      iconName: "Layout",
+      accentColor: "from-violet-500 to-indigo-500",
+      group: "Engineering",
+      badge: "Client Architecture",
+      description: "Component-based user interfaces, modern responsive designs, and reactive state management.",
+      skills: [
+        "HTML5",
+        "CSS3",
+        "React.js",
+        "TypeScript",
+        "JavaScript",
+        "Tailwind CSS",
+        "Responsive Web Design",
+        "Component-Based Architecture"
+      ]
+    },
+    {
+      title: "Software Testing and Quality Engineering",
+      iconName: "TestTube2",
       accentColor: "from-amber-500 to-orange-500",
+      group: "Testing & QA",
+      badge: "Autonomous QA",
+      description: "Automated test harnesses, regression prevention, synthetic test generation, and CI test suites.",
       skills: [
         "Functional Testing",
         "Regression Testing",
         "Integration Testing",
         "End-to-End Testing",
         "Test Case Design",
-        "Defect Reporting",
+        "Bug Reporting",
+        "Test Automation",
         "Vitest",
-        "GitHub Actions",
-        "CI/CD",
-        "Docker"
+        "API Testing",
+        "AI-Assisted Test Generation",
+        "Automated Test Repair",
+        "GitHub Actions"
+      ]
+    },
+    {
+      title: "Cybersecurity and Blockchain",
+      iconName: "Shield",
+      accentColor: "from-rose-500 to-red-500",
+      group: "Security & Systems",
+      badge: "Cryptographic Privacy",
+      description: "Privacy-preserving zero-knowledge circuits, cryptographic protocols, smart contracts, and network defense.",
+      skills: [
+        "Cybersecurity Fundamentals",
+        "Network Security",
+        "Application Security",
+        "Cryptography",
+        "Digital Signatures",
+        "Zero-Knowledge Proofs",
+        "Blockchain",
+        "Smart Contracts",
+        "Privacy-Preserving Systems",
+        "Security Testing"
+      ]
+    },
+    {
+      title: "Medical AI and Research",
+      iconName: "Activity",
+      accentColor: "from-teal-500 to-cyan-500",
+      group: "AI & Research",
+      badge: "Academic Research",
+      description: "Clinical MRI segmentation, parameter-efficient foundation adapters, and statistical evaluation.",
+      skills: [
+        "Medical Image Segmentation",
+        "U-Net",
+        "U-Net++",
+        "Segment Anything Model (SAM)",
+        "Image Processing",
+        "Model Fine-Tuning",
+        "Data Augmentation",
+        "Dice Score",
+        "Intersection over Union (IoU)",
+        "Model Evaluation"
       ]
     },
     {
       title: "Databases",
       iconName: "Database",
       accentColor: "from-blue-500 to-indigo-500",
+      group: "Data & Systems",
+      badge: "Data Modeling",
+      description: "Relational and document persistence, schema design, transactional integrity, and CRUD optimization.",
       skills: [
         "MySQL",
         "PostgreSQL",
         "MongoDB",
-        "Firebase"
+        "Firebase",
+        "SQL",
+        "Database Design",
+        "Database Management Systems (DBMS)",
+        "CRUD Operations",
+        "Data Modeling"
       ]
     },
     {
-      title: "Cybersecurity & Core CS",
-      iconName: "ShieldAlert",
-      accentColor: "from-rose-500 to-red-500",
+      title: "Computer Science Fundamentals",
+      iconName: "Boxes",
+      accentColor: "from-indigo-500 to-violet-500",
+      group: "CS Core",
+      badge: "Foundational Theory",
+      description: "Core algorithms, data structures, operating systems, networks, and computer architecture.",
       skills: [
-        "Cybersecurity",
-        "Blockchain",
-        "Zero-Knowledge Proofs",
-        "Data Structures & Algorithms",
-        "OOPs",
-        "DBMS",
+        "Data Structures and Algorithms (DSA)",
+        "Object-Oriented Programming (OOP)",
         "Operating Systems",
-        "Computer Networks"
+        "Computer Networks",
+        "Database Management Systems",
+        "Computer Architecture",
+        "Algorithms and Complexity Analysis",
+        "Software Engineering",
+        "Problem-Solving"
+      ]
+    },
+    {
+      title: "DevOps and Deployment",
+      iconName: "GitBranch",
+      accentColor: "from-sky-500 to-blue-600",
+      group: "DevOps & Tools",
+      badge: "Deployment & CI/CD",
+      description: "Containerization, automated workflow pipelines, Linux environments, and reliable deployment.",
+      skills: [
+        "Git",
+        "GitHub",
+        "Docker",
+        "CI/CD",
+        "GitHub Actions",
+        "Linux",
+        "PowerShell",
+        "Environment Configuration",
+        "Application Deployment"
       ]
     },
     {
       title: "Developer Tools",
       iconName: "Wrench",
       accentColor: "from-slate-400 to-zinc-400",
+      group: "DevOps & Tools",
+      badge: "Productivity & Tooling",
+      description: "Engineering IDEs, API debugging consoles, cloud accelerators, and browser developer diagnostics.",
       skills: [
+        "Visual Studio Code",
+        "Postman",
+        "Jupyter Notebook",
+        "Google Colab",
         "Git",
         "GitHub",
-        "VS Code",
-        "Linux"
+        "Browser Developer Tools"
       ]
     }
   ],
@@ -347,7 +460,26 @@ export const PORTFOLIO_DATA: {
         "Iterative code repair pipeline synthesizing regression-safe patches",
         "Seamless workflow automation integrated directly with GitHub Actions CI/CD"
       ],
-      githubUrl: "https://github.com/nikhilkumar1920/LemonX",
+      githubUrl: "https://github.com/nikhilkumar1920/lemon.ai",
+      featured: true,
+      image: "/images/projects/lemonx-preview.svg"
+    },
+    {
+      id: "voice-ai-orchestrator",
+      title: "Multi-Tenant Agentic Voice Orchestrator",
+      category: "Agentic AI · Voice SaaS · Full-Stack",
+      shortDescription: "An AI-powered multi-tenant Voice SaaS platform that automates outbound lead qualification calls using Vapi AI, LangGraph, FastAPI, MongoDB Atlas, React, and Docker.",
+      fullDescription: "Architected a multi-tenant voice automation platform that coordinates outbound AI voice qualification calls. Features dynamic webhook event processing, LangGraph-driven conversational state tracking and transcript evaluation, multi-tenant workspace isolation, and automated database updates.",
+      technologies: ["Python", "FastAPI", "LangGraph", "Vapi AI", "MongoDB Atlas", "React", "Docker"],
+      keyContribution: "Engineered LangGraph agent workflows for stateful call evaluation, transcript synthesis, and multi-tenant webhook reconciliation.",
+      highlights: [
+        "Multi-tenant voice SaaS architecture with customer status tracking and role-based data isolation",
+        "LangGraph state machine for dynamic call evaluation and conversational reasoning",
+        "Automated Vapi AI webhook pipelines with idempotency and retry handling",
+        "Live deployment with interactive frontend and Swagger API documentation"
+      ],
+      githubUrl: "https://github.com/nikhilkumar1920/voice-ai-orchestrator",
+      liveUrl: "https://voice-ai-orchestrator-5.onrender.com/",
       featured: true,
       image: "/images/projects/lemonx-preview.svg"
     },
@@ -357,14 +489,14 @@ export const PORTFOLIO_DATA: {
       category: "AI Research · Medical Imaging · Computer Vision",
       shortDescription: "Fine-tuned the Segment Anything Model (SAM-ViT-B) for brain tumor segmentation in MRI images using medical image preprocessing and domain adaptation techniques.",
       fullDescription: "Applied domain-aware adaptation techniques to Meta's Segment Anything Model (ViT-B) for automated Glioma segmentation in multi-modal brain MRIs. Introduced specialized prompt-free medical adapters and preprocessing pipelines to overcome domain divergence between natural photographs and clinical radiology scans.",
-      technologies: ["Python", "PyTorch", "SAM-ViT-B", "U-Net++", "Computer Vision"],
+      technologies: ["Python", "PyTorch", "SAM-ViT-B", "Computer Vision"],
       keyContribution: "Designed domain-aware prompt-free adapter tuning on SAM-ViT-B, achieving state-of-the-art boundary delineation on challenging multi-contrast MRI sequences.",
       metrics: [
         { label: "Dice Score", value: "0.9864", verified: true },
         { label: "IoU (Jaccard)", value: "0.9733", verified: true },
         { label: "Pixel Accuracy", value: "99.93%", verified: true }
       ],
-      evaluationNote: "Experimental results measured on research MRI test split. Conducted as academic research comparing against baseline U-Net++; not intended as a clinical guarantee.",
+      evaluationNote: "Experimental results measured on research MRI test split. Conducted as academic research; not intended as a clinical guarantee.",
       highlights: [
         "Fine-tuned SAM-ViT-B foundation model with parameter-efficient adapters",
         "Contrast normalization and skull-stripping medical image preprocessing pipeline",
@@ -390,8 +522,44 @@ export const PORTFOLIO_DATA: {
         "On-chain proof verification executed via EVM smart contracts",
         "Guaranteed mathematical confidentiality of sensitive medical and personal data"
       ],
-      githubUrl: "https://github.com/nikhilkumar1920",
+      githubUrl: "https://github.com/nikhilkumar1920/ZKP-BASED-MEDICAL-TRIAL-ELIGIBILITY-VERIFICATION-BY-BLOCKCHAIN",
       featured: true,
+      image: "/images/projects/zkp-preview.svg"
+    },
+    {
+      id: "linkplease",
+      title: "LinkPlease — Distributed DM Automation Service",
+      category: "Backend Systems · Microservices · Celery & Redis",
+      shortDescription: "A production-grade distributed backend service for automated social messaging workflows with HMAC-SHA256 webhook verification, Redis deduplication, and Celery retries.",
+      fullDescription: "Designed an asynchronous event-driven microservice to trigger automated direct messages based on social interaction keywords. Built with FastAPI, PostgreSQL, Celery, and Redis to handle high-throughput webhook streams with strict deduplication, signature security, and delivery reconciliation.",
+      technologies: ["Python", "FastAPI", "PostgreSQL", "Celery", "Redis", "Docker"],
+      keyContribution: "Built high-throughput webhook ingestion pipeline with HMAC signature validation, Redis atomic deduplication locks, and asynchronous Celery workers.",
+      highlights: [
+        "HMAC-SHA256 signature verification preventing tampering and unauthorized payloads",
+        "Redis-backed distributed deduplication ensuring exactly-once processing guarantees",
+        "Asynchronous Celery task execution with exponential backoff and retry budgets",
+        "Comprehensive delivery reconciliation and PostgreSQL audit logs"
+      ],
+      githubUrl: "https://github.com/nikhilkumar1920/Linkplease",
+      featured: false,
+      image: "/images/projects/stock-preview.svg"
+    },
+    {
+      id: "lenny-growth-assistant",
+      title: "The Lenny Growth Assistant — RAG Workspace",
+      category: "Generative AI · RAG · Full-Stack",
+      shortDescription: "A grounded product and growth workspace built on podcast transcripts using RAG, LLM multi-provider abstraction, and interactive document artifact rendering.",
+      fullDescription: "Constructed a grounded conversational and analytical workspace powered by retrieval-augmented generation across podcast transcript knowledge bases. Features modular model provider abstractions across Ollama, OpenAI, and Anthropic with persistent vector search in ChromaDB and interactive artifact generation.",
+      technologies: ["React", "TypeScript", "FastAPI", "PostgreSQL", "ChromaDB", "RAG"],
+      keyContribution: "Implemented hybrid retrieval combining dense vector embeddings with deterministic fallback retrieval, coupled with streaming artifact rendering.",
+      highlights: [
+        "Hybrid RAG retrieval pipeline querying dense ChromaDB embeddings with lexical fallback",
+        "Provider abstraction layer supporting local Ollama models alongside OpenAI and Anthropic",
+        "Interactive document synthesizer rendering structured Markdown and HTML deliverables",
+        "Full-stack reactive interface built with React, TypeScript, and Vite"
+      ],
+      githubUrl: "https://github.com/nikhilkumar1920/lenny-growth-assistant",
+      featured: false,
       image: "/images/projects/zkp-preview.svg"
     },
     {
@@ -407,7 +575,7 @@ export const PORTFOLIO_DATA: {
         "Interactive candlestick and technical indicator charts (SMA, EMA, RSI)",
         "Local data caching and CSV export functionality"
       ],
-      githubUrl: "https://github.com/nikhilkumar1920",
+      githubUrl: "https://github.com/nikhilkumar1920/stockprediction-",
       featured: false,
       image: "/images/projects/stock-preview.svg"
     },
@@ -424,41 +592,20 @@ export const PORTFOLIO_DATA: {
         "Comparative benchmark of Random Forest, Support Vector Machines, and Logistic Regression",
         "Evaluation using ROC-AUC, sensitivity, and confusion matrix analysis"
       ],
-      githubUrl: "https://github.com/nikhilkumar1920",
+      githubUrl: "https://github.com/nikhilkumar1920/Heart-Disease-Prediction",
       featured: false,
       image: "/images/projects/heart-preview.svg"
-    },
-    {
-      id: "unet-brain-tumor",
-      title: "Brain Tumor Segmentation — U-Net++",
-      category: "Deep Learning · Medical Image Segmentation",
-      shortDescription: "An encoder-decoder segmentation baseline developed to compare tumor segmentation performance against a fine-tuned Segment Anything Model.",
-      fullDescription: "Implemented a U-Net++ architecture featuring nested dense convolutional skip pathways and deep supervision as an empirical baseline to rigorously evaluate the performance of vision foundation models on MRI brain tumor datasets.",
-      technologies: ["Python", "PyTorch", "U-Net++", "OpenCV"],
-      keyContribution: "Implemented deeply supervised nested skip networks providing a baseline benchmark for medical image segmentation.",
-      metrics: [
-        { label: "Dice Score", value: "0.8395", verified: true },
-        { label: "IoU (Jaccard)", value: "0.7466", verified: true }
-      ],
-      evaluationNote: "Experimental baseline results measured during the comparative research study.",
-      highlights: [
-        "Nested dense skip pathways to bridge the semantic gap between encoder and decoder sub-networks",
-        "Deep supervision loss calculation for accelerated convergence across intermediate scales",
-        "Empirical benchmark confirming SAM-ViT-B adapter superiority (+0.1469 Dice improvement)"
-      ],
-      githubUrl: "https://github.com/nikhilkumar1920",
-      featured: false,
-      image: "/images/projects/sam-preview.svg"
     }
   ],
 
   leetcode: {
-    totalSolved: 215,
-    easy: 95,
-    medium: 105,
-    hard: 15,
-    acceptanceRate: "66.2%",
-    lastUpdated: "October 2026",
+    totalSolved: 194,
+    easy: 68,
+    medium: 101,
+    hard: 25,
+    acceptanceRate: "85.8%",
+    ranking: "906,486",
+    lastUpdated: "Real-time Live",
     profileUrl: "https://leetcode.com/u/nikhilkumar1920/"
   },
 

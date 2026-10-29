@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { 
   Mail, 
   Send, 
-  Calendar, 
   Copy, 
   Check, 
   MapPin
@@ -10,13 +9,8 @@ import {
 import confetti from 'canvas-confetti';
 import { PORTFOLIO_DATA } from '../data/portfolio';
 import { LinkedinIcon } from './SocialIcons';
-import { GoogleMeetIcon } from './GoogleMeetIcon';
 
-interface ContactProps {
-  onOpenScheduler: () => void;
-}
-
-export const Contact = ({ onOpenScheduler }: ContactProps) => {
+export const Contact = () => {
   const { personal } = PORTFOLIO_DATA;
   const [copiedEmail, setCopiedEmail] = useState(false);
   const [copiedPhone, setCopiedPhone] = useState(false);
@@ -129,14 +123,6 @@ export const Contact = ({ onOpenScheduler }: ContactProps) => {
 
         {/* Quick Action Buttons Row */}
         <div className="flex flex-wrap items-center justify-center gap-3.5 mb-14">
-          <button
-            onClick={onOpenScheduler}
-            className="flex items-center gap-2 rounded-xl bg-gradient-to-r from-violet-600 to-cyan-600 hover:from-violet-500 hover:to-cyan-500 px-6 py-3 text-xs font-semibold text-white shadow-lg shadow-violet-600/20 transition-all hover:scale-105 active:scale-95"
-          >
-            <Calendar className="h-4 w-4" />
-            <span>Schedule a Meeting</span>
-          </button>
-
           <a
             href={`mailto:${personal.socials.email}`}
             className="flex items-center gap-2 rounded-xl border border-slate-700 bg-slate-900/80 hover:bg-slate-800 hover:border-violet-500 px-6 py-3 text-xs font-mono text-slate-200 transition-all hover:scale-105"
@@ -166,7 +152,7 @@ export const Contact = ({ onOpenScheduler }: ContactProps) => {
                 Direct Channels
               </h3>
               <p className="font-sans text-xs sm:text-sm text-slate-400 leading-relaxed mb-6">
-                Feel free to reach out directly via email, phone, or schedule a calendar invitation.
+                Feel free to reach out directly via email, phone, or LinkedIn.
               </p>
 
               {/* Email Box with Copy */}
@@ -218,31 +204,7 @@ export const Contact = ({ onOpenScheduler }: ContactProps) => {
                 </div>
               </div>
 
-              {/* Google Meet Video Scheduling Card */}
-              <div className="rounded-2xl border border-emerald-500/30 bg-emerald-950/20 p-4 flex flex-col justify-between gap-3 shadow-[0_0_20px_rgba(0,172,71,0.15)]">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <GoogleMeetIcon className="h-4 w-4" />
-                    <span className="font-heading text-xs font-bold text-white">
-                      Google Meet Video Call
-                    </span>
-                  </div>
-                  <span className="font-mono text-[10px] text-emerald-400 bg-emerald-950/60 border border-emerald-500/30 px-2 py-0.5 rounded-full">
-                    1-on-1 HD
-                  </span>
-                </div>
-                <p className="font-sans text-[11px] text-slate-400 leading-snug">
-                  Schedule an instant or planned 15, 30, or 45-minute video discussion via Google Meet.
-                </p>
-                <button
-                  type="button"
-                  onClick={onOpenScheduler}
-                  className="w-full flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 py-2.5 font-mono text-xs font-semibold text-white shadow-md transition-all hover:scale-[1.01]"
-                >
-                  <Calendar className="h-3.5 w-3.5" />
-                  <span>Schedule on Google Meet</span>
-                </button>
-              </div>
+
             </div>
           </div>
 

@@ -12,12 +12,12 @@
     --color-text-muted: #94a3b8;
   }
 
-  .light {
+  html.light {
     --color-bg: #f8fafc;
     --color-bg-secondary: #f1f5f9;
     --color-card: #ffffff;
-    --color-border: rgba(139, 92, 246, 0.2);
-    --color-text-main: #090d16;
+    --color-border: rgba(203, 213, 225, 0.8);
+    --color-text-main: #0f172a;
     --color-text-muted: #475569;
   }
 
@@ -52,6 +52,19 @@
   }
 
   ::-webkit-scrollbar-thumb:hover {
+    background: #8b5cf6;
+  }
+
+  html.light ::-webkit-scrollbar-track {
+    background: #f1f5f9;
+  }
+
+  html.light ::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border: 2px solid #f1f5f9;
+  }
+
+  html.light ::-webkit-scrollbar-thumb:hover {
     background: #8b5cf6;
   }
 }
@@ -104,6 +117,282 @@
     background-image: radial-gradient(rgba(139, 92, 246, 0.18) 1px, transparent 1px);
     background-size: 24px 24px;
   }
+}
+
+/* ==========================================================================
+   LIGHT MODE DESIGN SYSTEM
+   Curated palette: Crisp Slate-50 canvas with modern frosted glassmorphism,
+   refined indigo/slate typography, and high-contrast accents.
+   ========================================================================== */
+
+/* Glass surfaces in light mode */
+html.light .glass-card {
+  background: rgba(255, 255, 255, 0.88) !important;
+  border-color: rgba(226, 232, 240, 0.9) !important;
+  box-shadow: 0 10px 30px -5px rgba(99, 102, 241, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.02) !important;
+}
+
+html.light .glass-card-hover:hover {
+  background: rgba(255, 255, 255, 0.98) !important;
+  border-color: rgba(139, 92, 246, 0.35) !important;
+  box-shadow: 0 20px 35px -10px rgba(139, 92, 246, 0.12), 0 0 15px -3px rgba(6, 182, 212, 0.08) !important;
+}
+
+html.light .glass-nav {
+  background: rgba(255, 255, 255, 0.88) !important;
+  border-bottom: 1px solid rgba(226, 232, 240, 0.9) !important;
+  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05) !important;
+}
+
+/* Section backgrounds & Alternating strips */
+html.light section[class*="bg-slate-950"],
+html.light div[class*="bg-slate-950\/60"]:not(.terminal-window):not(.terminal-window *),
+html.light div[class*="bg-slate-950\/40"]:not(.terminal-window):not(.terminal-window *) {
+  background-color: rgba(241, 245, 249, 0.65) !important;
+}
+
+html.light footer,
+html.light footer.bg-\[\#04060b\] {
+  background-color: #f1f5f9 !important;
+  border-color: rgba(226, 232, 240, 0.9) !important;
+}
+
+/* Internal dark boxes adapt to clean light cards */
+html.light [class*="bg-slate-900"]:not(.terminal-window):not(.terminal-window *):not([class*="bg-gradient"]):not([class*="from-"]):not([class*="to-"]) {
+  background-color: rgba(255, 255, 255, 0.92) !important;
+}
+
+html.light [class*="bg-slate-950"]:not(.terminal-window):not(.terminal-window *):not([class*="bg-gradient"]):not([class*="from-"]):not([class*="to-"]):not(section) {
+  background-color: #ffffff !important;
+}
+
+/* Borders in light mode */
+html.light [class*="border-slate-800"]:not(.terminal-window):not(.terminal-window *),
+html.light [class*="border-slate-900"]:not(.terminal-window):not(.terminal-window *) {
+  border-color: rgba(226, 232, 240, 0.9) !important;
+}
+
+html.light [class*="border-slate-700"]:not(.terminal-window):not(.terminal-window *) {
+  border-color: rgba(203, 213, 225, 0.85) !important;
+}
+
+/* Headings and Typography in light mode */
+html.light h1:not([class*="bg-clip-text"]),
+html.light h2:not([class*="bg-clip-text"]),
+html.light h3:not([class*="bg-clip-text"]):not(.terminal-window *),
+html.light h4:not([class*="bg-clip-text"]):not(.terminal-window *),
+html.light .font-heading.text-white:not([class*="bg-clip-text"]),
+html.light .text-slate-100:not(.terminal-window *) {
+  color: #0f172a !important;
+}
+
+html.light .text-white:not(.keep-white):not([class*="from-"]):not([class*="bg-gradient"] *):not(button[class*="bg-gradient"]):not(a[class*="bg-gradient"]):not(.terminal-window *):not([class*="animate-ping"]):not([class*="bg-clip-text"]) {
+  color: #0f172a !important;
+}
+
+html.light .text-slate-200:not(.terminal-window *) {
+  color: #1e293b !important;
+}
+
+html.light .text-slate-300:not(.terminal-window *) {
+  color: #334155 !important;
+}
+
+html.light .text-slate-400:not(.terminal-window *) {
+  color: #475569 !important;
+}
+
+html.light .text-slate-500:not(.terminal-window *) {
+  color: #64748b !important;
+}
+
+/* Colored accent badges & containers in light mode */
+html.light .bg-violet-950\/20,
+html.light .bg-violet-950\/30,
+html.light .bg-violet-950\/40 {
+  background-color: rgba(245, 243, 255, 0.9) !important;
+  border-color: rgba(139, 92, 246, 0.25) !important;
+}
+
+html.light .bg-cyan-950\/20,
+html.light .bg-cyan-950\/30,
+html.light .bg-cyan-950\/40 {
+  background-color: rgba(236, 254, 255, 0.9) !important;
+  border-color: rgba(6, 182, 212, 0.25) !important;
+}
+
+html.light .bg-amber-950\/20,
+html.light .bg-amber-950\/30 {
+  background-color: rgba(254, 243, 199, 0.9) !important;
+  border-color: rgba(245, 158, 11, 0.25) !important;
+}
+
+html.light .bg-emerald-950\/20,
+html.light .bg-emerald-950\/30,
+html.light .bg-emerald-950\/60 {
+  background-color: rgba(236, 253, 245, 0.9) !important;
+  border-color: rgba(16, 185, 129, 0.25) !important;
+}
+
+/* Enhanced contrast for accent text in light mode */
+html.light .text-cyan-400:not(.terminal-window *),
+html.light .text-cyan-300:not(.terminal-window *),
+html.light .text-cyan-200:not(.terminal-window *) {
+  color: #0284c7 !important;
+}
+
+html.light .text-violet-400:not(.terminal-window *),
+html.light .text-violet-300:not(.terminal-window *) {
+  color: #7c3aed !important;
+}
+
+html.light .text-amber-400:not(.terminal-window *),
+html.light .text-amber-300:not(.terminal-window *) {
+  color: #d97706 !important;
+}
+
+html.light .text-emerald-400:not(.terminal-window *),
+html.light .text-emerald-300:not(.terminal-window *) {
+  color: #059669 !important;
+}
+
+/* Navigation Bar in light mode */
+html.light header a .text-white {
+  color: #0f172a !important;
+}
+
+html.light header a .text-slate-200 {
+  color: #1e293b !important;
+}
+
+html.light nav.bg-slate-900\/60 {
+  background-color: rgba(241, 245, 249, 0.85) !important;
+  border-color: rgba(226, 232, 240, 0.9) !important;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+}
+
+html.light nav a {
+  color: #475569 !important;
+}
+
+html.light nav a:hover {
+  color: #0f172a !important;
+}
+
+html.light nav a.text-cyan-300 {
+  color: #7c3aed !important;
+  font-weight: 600 !important;
+}
+
+html.light header button {
+  background-color: #ffffff !important;
+  border-color: #e2e8f0 !important;
+  color: #475569 !important;
+}
+
+html.light header button:hover {
+  color: #0f172a !important;
+  border-color: #a78bfa !important;
+}
+
+html.light header a[download] {
+  background-color: #ffffff !important;
+  border-color: #e2e8f0 !important;
+  color: #0f172a !important;
+}
+
+html.light header a[download]:hover {
+  border-color: #8b5cf6 !important;
+}
+
+/* Mobile navigation drawer in light mode */
+html.light .fixed.top-16.glass-card {
+  background-color: rgba(255, 255, 255, 0.98) !important;
+  border-color: rgba(226, 232, 240, 0.95) !important;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1) !important;
+}
+
+html.light .fixed.top-16.glass-card a {
+  color: #334155 !important;
+}
+
+html.light .fixed.top-16.glass-card a:hover {
+  background-color: #f1f5f9 !important;
+  color: #0f172a !important;
+}
+
+/* Secondary CTA buttons (Download CV, View in new tab, Socials) */
+html.light a[download].border-slate-700,
+html.light a[href*="resume"].border-slate-700 {
+  background-color: #ffffff !important;
+  border-color: #cbd5e1 !important;
+  color: #0f172a !important;
+}
+
+html.light a[download].border-slate-700:hover,
+html.light a[href*="resume"].border-slate-700:hover {
+  background-color: #f8fafc !important;
+  border-color: #8b5cf6 !important;
+  color: #0f172a !important;
+}
+
+html.light a[aria-label*="Profile"].border-slate-800,
+html.light a[aria-label*="Email"].border-slate-800,
+html.light a[aria-label*="GitHub"].border-slate-800,
+html.light a[aria-label*="LinkedIn"].border-slate-800,
+html.light a[aria-label*="LeetCode"].border-slate-800 {
+  background-color: #ffffff !important;
+  border-color: #e2e8f0 !important;
+  color: #475569 !important;
+}
+
+html.light a[aria-label*="Profile"].border-slate-800:hover,
+html.light a[aria-label*="Email"].border-slate-800:hover,
+html.light a[aria-label*="GitHub"].border-slate-800:hover,
+html.light a[aria-label*="LinkedIn"].border-slate-800:hover,
+html.light a[aria-label*="LeetCode"].border-slate-800:hover {
+  color: #0f172a !important;
+}
+
+/* Hero Technology Ticker in light mode */
+html.light .bg-slate-950\/60.border-y {
+  background-color: rgba(241, 245, 249, 0.9) !important;
+  border-color: rgba(226, 232, 240, 0.9) !important;
+}
+
+html.light .bg-slate-950\/60.border-y span.text-slate-300 {
+  color: #334155 !important;
+}
+
+html.light .bg-slate-950\/60.border-y span.text-slate-300:hover {
+  color: #7c3aed !important;
+}
+
+/* Background grid patterns in light mode */
+html.light .bg-cyber-grid,
+html.light .grid-pattern {
+  background-image: 
+    linear-gradient(to right, rgba(15, 23, 42, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(15, 23, 42, 0.04) 1px, transparent 1px) !important;
+}
+
+/* Form inputs & textareas in light mode */
+html.light input:not([type="submit"]):not([type="button"]),
+html.light textarea {
+  background-color: #ffffff !important;
+  color: #0f172a !important;
+  border-color: #cbd5e1 !important;
+}
+
+html.light input::placeholder,
+html.light textarea::placeholder {
+  color: #94a3b8 !important;
+}
+
+/* Interactive Terminal simulator stays dark console window */
+.terminal-window {
+  background-color: #070a14 !important;
+  border-color: rgba(139, 92, 246, 0.3) !important;
 }
 
 /* Reduced motion preference */
